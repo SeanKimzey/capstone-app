@@ -1,3 +1,7 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  get "/samples" => "samples#index"
+  get "/samples/:id" => "samples#show"
+  post "/samples" => "samples#create" 
+  post "/samples/:id" => "samples#update"
+  delete "/samples/:id" => "samples#destroy"
 end

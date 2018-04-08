@@ -1,0 +1,2 @@
+class CartedSample < ApplicationRecord
+end

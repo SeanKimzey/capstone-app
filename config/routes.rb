@@ -4,4 +4,6 @@ Rails.application.routes.draw do
   post "/samples" => "samples#create" 
   post "/samples/:id" => "samples#update"
   delete "/samples/:id" => "samples#destroy"
+
+  post "/users" => "users#create"
 end

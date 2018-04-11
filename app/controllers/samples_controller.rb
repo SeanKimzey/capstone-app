@@ -14,11 +14,11 @@ class SamplesController < ApplicationController
     sample = Sample.create(
       name: "Drum3",
       user_id: 1,
-      sample_type: "test",
-      bpm: 122,
+      sample_type: "sampletest",
+      bpm: 160,
       key: "n/a",
       sample_rate: "96khz",
-      bit_depth: "243",
+      bit_depth: "24bit",
       audio_sample: "sefkmkref"
       )
     render json: {message: "You added a new sample"}

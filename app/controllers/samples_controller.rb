@@ -11,17 +11,21 @@ class SamplesController < ApplicationController
   end
 
   def create
-    sample = Sample.create(
-      name: "Drum3",
-      user_id: 1,
-      sample_type: "sampletest",
-      bpm: 160,
-      key: "n/a",
-      sample_rate: "96khz",
-      bit_depth: "24bit",
-      audio_sample: "sefkmkref"
-      )
+    sample = Sample.new(
+      user_id: 1, 
+      name: params[:inputName], 
+      sample_type: params[:inputSampleType],
+      bpm: params[:inputBPM], 
+      key: params[:inputKey], 
+      sample_rate: params[:inputSampleRate], 
+      bit_depth: params[:inputBitDepth], 
+     )
+
+      
+    sample.save
+    p sample.errors.full_messages
     render json: {message: "You added a new sample"}
+
   end
 
   def update

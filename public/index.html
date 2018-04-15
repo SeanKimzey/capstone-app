@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My App</title>
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.js"></script>
+  <script src="index.js" defer></script>
+</head>
+<body>
+  <div id="vue-app">
+
+    <router-view></router-view>
+
+  </div>
+</body>
+</html>
+
+<template id="home-page">
+  <div class="vue-component">
+    <h1>{{ message }}</h1>
+
+    <div v-for="sample in samples">
+      <h2> {{ sample.name }} </h2>
+      <p> Type: {{ sample.sample_type }} </p>
+      <p> BPM: {{ sample.bpm }} </p>
+      <p> Key: {{ sample.key }} </p>
+      <p> Sample Rate: {{ sample.sample_rate }} </p>
+      <p> Bit Depth: {{ sample.bit_depth }} </p>
+      <audio controls>
+      <source src="" type="audio/ogg">
+      <source src="" type="audio/mpeg">
+      Your browser does not support the audio element.
+      </audio>  
+      <hr>
+    </div>
+    <hr>
+    <h1> Upload a new sample</h1>
+   
+    <p> Name: <input type="text" v-model="newSample.name"></p>
+    <p> type: <input type="text" v-model="newSample.sample_type"></p>
+    <p> bpm: <input type="text" v-model="newSample.bpm"></p>
+    <p> key: <input type="text" v-model="newSample.key"></p>
+    <p> sample_rate: <input type="text" v-model="newSample.sample_rate"></p>
+    <p> bit_depth: <input type="text" v-model="newSample.bit_depth"></p>
+
+    <form action="/action_page.php">
+    <input type="file" accept=".mp3">
+    <input type="submit">
+    </form>
+
+    <button v-on:click="uploadSample()"> Add a Sample</button>
+
+
+  </div>
+</template>

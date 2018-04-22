@@ -28,6 +28,7 @@
       <p> Key: {{ sample.key }} </p>
       <p> Sample Rate: {{ sample.sample_rate }} </p>
       <p> Bit Depth: {{ sample.bit_depth }} </p>
+      <img v-bind:src="sample.image">
       <audio controls>
       <source src="" type="audio/ogg">
       <source src="" type="audio/mpeg">
@@ -44,13 +45,11 @@
     <p> key: <input type="text" v-model="newSample.key"></p>
     <p> sample_rate: <input type="text" v-model="newSample.sample_rate"></p>
     <p> bit_depth: <input type="text" v-model="newSample.bit_depth"></p>
+    <p>Sample: </p>
+    <input v-model="newSample.image" type="file">
+    <!-- <input type="submit"> -->
 
-    <form action="/action_page.php">
-    <input type="file" accept=".mp3">
-    <input type="submit">
-    </form>
-
-    <button v-on:click="uploadSample()"> Add a Sample</button>
+    <button v-on:click="uploadSample()">Add a Sample</button>
 
 
   </div>

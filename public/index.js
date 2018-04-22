@@ -23,13 +23,14 @@ var HomePage = {
         inputBPM: this.newSample.sample_bpm,
         inputKey: this.newSample.key,
         inputSampleRate: this.newSample.sample_rate,
-        inputBitDepth: this.newSample.bit_depth
+        inputBitDepth: this.newSample.bit_depth,
+        inputImage: this.newSample.image
       };
       axios.post("/samples", params).then(function(
         response) {
         console.log(response.data);
         this.samples.push(response.data);
-        this.newSample = {user_id: "", name: "", sample_type: "", bpm: "", key: "", sample_rate: "", bit_depth: ""};
+        this.newSample = {user_id: "", name: "", sample_type: "", bpm: "", key: "", sample_rate: "", bit_depth: "", image: ""};
       }.bind(this));
 
     }

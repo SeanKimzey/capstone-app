@@ -18,7 +18,8 @@ class SamplesController < ApplicationController
       bpm: params[:inputBPM], 
       key: params[:inputKey], 
       sample_rate: params[:inputSampleRate], 
-      bit_depth: params[:inputBitDepth], 
+      bit_depth: params[:inputBitDepth],
+      image: params[:inputImage]
      )
 
       

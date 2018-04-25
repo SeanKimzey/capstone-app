@@ -16,25 +16,34 @@ var HomePage = {
 
   },
   methods: {
-    uploadSample: function() {
-      var params = {
-        inputName: this.newSample.name,
-        inputSampleType: this.newSample.sample_type,
-        inputBPM: this.newSample.bpm,
-        inputKey: this.newSample.key,
-        inputSampleRate: this.newSample.sample_rate,
-        inputBitDepth: this.newSample.bit_depth,
-      };
-      axios.post("/samples", params).then(function(
-        response) {
-        console.log(response.data);
-        this.samples.push(response.data);
-        this.newSample = {user_id: "", name: "", sample_type: "", bpm: "", key: "", sample_rate: "", bit_depth: ""};
-      }.bind(this));
+    uploadFile: function(event) {
+      if (event.target.files.length > 0) {
+        var formData = new FormData();
+        formData.append("name", this.newSample.name);
+        formData.append("sample_type", this.newSample.sample_type);
+        formData.append("bpm", this.newSample.bpm);
+        formData.append("key", this.newSample.key);
+        formData.append("sample_rate", this.newSample.sample_rate);
+        formData.append("bit_depth", this.newSample.bit_depth);
+        formData.append("image", event.target.files[0]);
 
+        axios
+          .post("http://localhost:3000/samples", formData)
+          .then(function(response) {
+            console.log(response);
+            this.name = "";
+            this.sample_type = "";
+            this.bpm = "";
+            this.key = "";
+            this.sample_rate = "";
+            this.bit_depth = ""; 
+            event.target.value = "";
+          }.bind(this));
+
+      }
     }
-    
   },
+
   computed: {}
 };
 
@@ -49,3 +58,5 @@ var app = new Vue({
   el: "#vue-app",
   router: router
 });
+
+

@@ -28,6 +28,7 @@
       <p> Key: {{ sample.key }} </p>
       <p> Sample Rate: {{ sample.sample_rate }} </p>
       <p> Bit Depth: {{ sample.bit_depth }} </p>
+      <img src="IMG_2465 (1).JPG" height="100" width="100">
       <hr>
     </div>
     <hr>
@@ -39,9 +40,14 @@
     <p> key: <input type="text" v-model="newSample.key"></p>
     <p> sample_rate: <input type="text" v-model="newSample.sample_rate"></p>
     <p> bit_depth: <input type="text" v-model="newSample.bit_depth"></p>
+      <div>
+        Image: <input type="file" v-on:change="uploadFile($event)">
+      </div>
  
-    <button v-on:click="uploadSample()">Add a Sample</button>
+    <!-- <button v-on:click="uploadSample()">Add a Sample</button> -->
 
 
   </div>
 </template>
+
+

@@ -28,7 +28,11 @@
       <p> Key: {{ sample.key }} </p>
       <p> Sample Rate: {{ sample.sample_rate }} </p>
       <p> Bit Depth: {{ sample.bit_depth }} </p>
-      <img v-bind:src='sample.image_file_name' height="500" width="500">
+      <p> Bit Depth: {{ sample.bit_depth }} </p>
+      <p>hello {{sample.id}}</p>
+      <p>hello {{sample.image}}</p>
+      <img v-bind:src="sample.image" height="200" width="200">
+      <!-- <img v-bind:src="sample.image_file_name" height="500" width="500"> -->
       <hr>
     </div>
     <hr>

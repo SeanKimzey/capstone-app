@@ -9,7 +9,6 @@ class Sample < ApplicationRecord
       content_type: ["image/jpeg", "image/gif", "image/png"]
     }
 
-
   def as_json
 
     {
@@ -21,8 +20,8 @@ class Sample < ApplicationRecord
       sample_rate: sample_rate, 
       bit_depth: bit_depth,
       image: image.url,
-      the: "hello"
-  
+      first_name: user.first_name,
+      last_name: user.last_name
     }
   end
 

@@ -17,27 +17,29 @@ var HomePage = {
   },
   methods: {
     uploadFile: function(event) {
-      if (event.target.files.length > 0) {
+      input = document.getElementById("fileUploadInput");
+      if (input.files.length > 0) {
         var formData = new FormData();
-        formData.append("name", this.newSample.name);
+        formData.append("name", this.name);
         formData.append("sample_type", this.newSample.sample_type);
         formData.append("bpm", this.newSample.bpm);
         formData.append("key", this.newSample.key);
         formData.append("sample_rate", this.newSample.sample_rate);
         formData.append("bit_depth", this.newSample.bit_depth);
-        formData.append("image", event.target.files[0]);
+        formData.append("image", input.files[0]);
 
         axios
           .post("http://localhost:3000/samples", formData)
           .then(function(response) {
             console.log(response);
+            console.log(this);
             this.name = "";
-            this.sample_type = "";
-            this.bpm = "";
-            this.key = "";
-            this.sample_rate = "";
-            this.bit_depth = ""; 
-            event.target.value = "";
+            this.newSample.sample_type = "";
+            this.newSample.bpm = "";
+            this.newSample.key = "";
+            this.newSample.sample_rate = "";
+            this.newSample.bit_depth = ""; 
+            input.value = "";
           }.bind(this));
 
       }

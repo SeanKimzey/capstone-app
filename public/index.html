@@ -21,19 +21,8 @@
   <div class="vue-component">
     <h1>{{ message }}</h1>
 
-    <div v-for="sample in samples">
-      <h2> {{ sample.name }} </h2>
-      <p> Type: {{ sample.sample_type }} </p>
-      <p> BPM: {{ sample.bpm }} </p>
-      <p> Key: {{ sample.key }} </p>
-      <p> Sample Rate: {{ sample.sample_rate }} </p>
-      <p> Bit Depth: {{ sample.bit_depth }} </p>
-      <p> Bit Depth: {{ sample.bit_depth }} </p>
-      <p>Uploaded By: {{ sample.first_name }} {{sample.last_name}}</p>
-      <img v-bind:src="sample.image" height="200" width="200">
-      <hr>
-    </div>
-    <hr>
+
+
     <h1> Upload a new sample</h1>
    
     <p> Name: <input type="text" v-model="newSample.name"></p>
@@ -43,12 +32,27 @@
     <p> sample_rate: <input type="text" v-model="newSample.sample_rate"></p>
     <p> bit_depth: <input type="text" v-model="newSample.bit_depth"></p>
       <div>
-        Image: <input type="file" v-on:change="uploadFile($event)">
+        Image: <input id="fileUploadInput" type="file">
       </div>
 
  
-    <!-- <button v-on:click="uploadSample()">Add a Sample</button> -->
+    <button v-on:click="uploadFile($event)">Add a Sample</button>
+    <hr>
 
+    <div v-for="sample in samples">
+      <h2> {{ sample.name }} </h2>
+      <p> Type: {{ sample.sample_type }} </p>
+      <p> BPM: {{ sample.bpm }} </p>
+      <p> Key: {{ sample.key }} </p>
+      <p> Sample Rate: {{ sample.sample_rate }} </p>
+      <p> Bit Depth: {{ sample.bit_depth }} </p>
+      <p> Bit Depth: {{ sample.bit_depth }} </p>
+      <audio v-bind:src="sample.image" controls="true"> Your browser does not support the <code>audio</code> element.
+      </audio>
+      <p>Uploaded By: {{ sample.first_name }} {{sample.last_name}}</p>
+      <hr>
+    </div>
+    
 
   </div>
 </template>

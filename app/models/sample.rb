@@ -4,7 +4,7 @@ class Sample < ApplicationRecord
   has_many :categories, through: :category_samples
   has_many :orders
   has_attached_file :image
-  validates_attachment_content_type :image, :content_type => ['audio/mp3', 'audio/mpeg']
+  validates_attachment_content_type :image, :content_type => [ 'audio/mpeg', 'audio/x-mpeg', 'audio/mp3', 'audio/x-mp3', 'audio/mpeg3', 'audio/x-mpeg3', 'audio/mpg', 'audio/x-mpg', 'audio/x-mpegaudio' ]
 
   def as_json
 

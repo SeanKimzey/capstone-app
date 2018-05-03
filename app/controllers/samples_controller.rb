@@ -12,7 +12,7 @@ class SamplesController < ApplicationController
 
   def create
     sample = Sample.new(
-      user_id: 1, 
+      user_id: current_user.id, 
       name: params[:name], 
       sample_type: params[:sample_type],
       bpm: params[:bpm], 
@@ -43,3 +43,5 @@ class SamplesController < ApplicationController
   end
 
 end
+
+

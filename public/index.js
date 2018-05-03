@@ -45,7 +45,8 @@ var SignupPage = {
   template: "#signup-page",
   data: function() {
     return {
-      name: "",
+      first_name: "",
+      last_name: "",
       email: "",
       password: "",
       passwordConfirmation: "",
@@ -55,13 +56,14 @@ var SignupPage = {
   methods: {
     submit: function() {
       var params = {
-        name: this.name,
+        first_name: this.first_name,
+        last_name: this.last_name,
         email: this.email,
         password: this.password,
         password_confirmation: this.passwordConfirmation
       };
       axios
-        .post("/v1/users", params)
+        .post("/users", params)
         .then(function(response) {
           router.push("/login");
         })

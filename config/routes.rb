@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
 
+   # users routes
+
+  post "/users" => "users#create"
+  post "/user_token" => "user_token#create"
+
    # samples routes 
 
   get "/samples" => "samples#index"
@@ -8,10 +13,7 @@ Rails.application.routes.draw do
   post "/samples/:id" => "samples#update"
   delete "/samples/:id" => "samples#destroy"
 
-   # users routes
-
-  post "/users" => "users#create"
-  post "user_token" => "user_token#create"
+  
 
   # carted samples routes
 

@@ -29,5 +29,9 @@ class UsersController < ApplicationController
       
   end
 
+  def show
+    render json: current_user.as_json
+  end
+
 
 end                                                                                                         

@@ -2,7 +2,11 @@ class SamplesController < ApplicationController
 
   def index
     samples = Sample.all
+    p "***********"
+    p current_user
+    p "***********"
     render json: samples.as_json
+
   end
 
   def show

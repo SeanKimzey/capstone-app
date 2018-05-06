@@ -41,12 +41,12 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <!-- <li class="active"><a href="#home">Home</a></li> -->
-                <li class="active"><a href="/#/">Home</a></li>
-                <li><a href="/#/samples">Samples</a></li>
-                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="/#/">Home</a></li>
+                <li><a href="/#/samples">Search Samples</a></li>
                 <li><a href="/#/login">Login</a></li>
                 <li><a href="/#/logout">Logout</a></li>
                 <li><a href="/#/signup">Signup</a></li>
+                <li><a href="/#/carted_samples">Carted Samples</a></li>
 
             </ul>
 
@@ -344,14 +344,15 @@
                     <ul class="list-group list-group-flush text-center">
                         <li class="list-group-item"><i class="icon-ok text-danger"></i> {{sample.bpm}}</li>
                         <li class="list-group-item"><i class="icon-ok text-danger"></i> {{sample.sample_rate}}</li>
-                        <li class="list-group-item"><i class="icon-ok text-danger"></i> 27/7 support</li>
+                        <li class="list-group-item"><i class="icon-ok text-danger"></i> {{sample.user_id}}</li>
                     </ul>
-                     <audio id="player" v-bind:src="sample.image" controls="true" controlsList="nodownload" > Your browser does not support the <code>audio</code> element.
+                     <audio id="player" v-bind:src="sample.image" controls="true" v-if="currentUser" controlsList="download" > Your browser does not support the <code>audio</code> element.
+                    </audio>
+                     <audio  id="player" v-bind:src="sample.image" controls="true" v-else controlsList="nodownload" > Your browser does not support the <code>audio</code> element.
                     </audio>
                     <div class="panel-footer">
                         <a class="btn btn-lg btn-block btn-danger"
-                           href="https://creativemarket.com/artlabs/12114-Bootstrap-3.0.-pricing-tables-flat">BUY
-                            NOW!</a>
+                           href="https://creativemarket.com/artlabs/12114-Bootstrap-3.0.-pricing-tables-flat">Add To Sample Cart</a>
                     </div>
                 </div>
 
@@ -478,10 +479,7 @@
                                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                         <div class="testimonial item">
                                                             <p>
-                                                                Lorem Ipsum is simply dummy text of the printing and
-                                                                typesetting industry. Lorem Ipsum has been the
-                                                                industry's standard dummy text ever since the 1500s,
-                                                                when an unknown printer took a galley of type.
+                                                                placeholder
                                                             </p>
 
                                                             <div class="testimonials-arrow">
@@ -501,10 +499,7 @@
                                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                         <div class="testimonial item">
                                                             <p>
-                                                                Lorem Ipsum is simply dummy text of the printing and
-                                                                typesetting industry. Lorem Ipsum has been the
-                                                                industry's standard dummy text ever since the 1500s,
-                                                                when an unknown printer took a galley of type.
+                                                                place
                                                             </p>
 
                                                             <div class="testimonials-arrow">
@@ -523,10 +518,7 @@
                                                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                                         <div class="testimonial item">
                                                             <p>
-                                                                Lorem Ipsum is simply dummy text of the printing and
-                                                                typesetting industry. Lorem Ipsum has been the
-                                                                industry's standard dummy text ever since the 1500s,
-                                                                when an unknown printer took a galley of type.
+                                                             placeholder
                                                             </p>
 
                                                             <div class="testimonials-arrow">
@@ -602,8 +594,7 @@
                 <br/>
                 <h4 class="pull-top">Get in <strong>touch</strong></h4>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eget leo at velit imperdiet
-                    varius. In eu ipsum vitae velit congue iaculis vitae at risus.</p>
+                <p>placeholder</p>
 
                 <hr>
 
@@ -627,6 +618,18 @@
 
 </section>
 </div>
+</template>
+
+
+<template id="carted_samples-page">
+  <div class="vue-component">
+   
+    <br>
+    <br>
+
+    <h1>{{ message }}</h1>
+
+  </div>
 </template>
 
 
@@ -668,6 +671,21 @@
       </div>
       <button class="btn btn-primary" v-on:click="submit()">Submit</button>
     </div>
+
+      <!--  <h1> Upload a new sample</h1>
+   
+    <p> Name: <input type="text" v-model="newSample.name"></p>
+    <p> type: <input type="text" v-model="newSample.sample_type"></p>
+    <p> bpm: <input type="text" v-model="newSample.bpm"></p>
+    <p> key: <input type="text" v-model="newSample.key"></p>
+    <p> sample_rate: <input type="text" v-model="newSample.sample_rate"></p>
+    <p> bit_depth: <input type="text" v-model="newSample.bit_depth"></p>
+      <div>
+        Audio: <input id="fileUploadInput" type="file">
+      </div>
+ -->
+ 
+    <!-- <button v-on:click="uploadFile($event)">Add a Sample</button> -->
 
   </div>
 </template>

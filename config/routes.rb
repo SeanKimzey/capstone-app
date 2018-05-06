@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   post "/users" => "users#create"
   post "/user_token" => "user_token#create"
+  get "/current_user" => "users#show"
 
    # samples routes 
 
@@ -20,5 +21,11 @@ Rails.application.routes.draw do
   post "/carted_samples" => "carted_samples#create"
   get "/carted_samples" => "carted_samples#index"
   delete "/carted_samples" => "carted_samples#delete"
+
+
+
+
+
+
     
 end

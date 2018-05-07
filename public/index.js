@@ -5,6 +5,7 @@ var LogoutPage = {
     axios.defaults.headers.common["Authorization"] = undefined;
     localStorage.removeItem("jwt");
     router.push("/");
+    alert("You successfully logged out!");
   }
 };
 
@@ -29,6 +30,7 @@ var LoginPage = {
             "Bearer " + response.data.jwt;
           localStorage.setItem("jwt", response.data.jwt);
           router.push("/");
+          alert("You successfully logged in!");
         })
         .catch(
           function(error) {
@@ -173,13 +175,3 @@ var app = new Vue({
   el: "#vue-app",
   router: router
 });
-
-// show or hide button based on if user is logged in
-
-// --> know if the user is logged in - done
-
-// --> make axios request to API to grab data for user that is curently logged in
-
-// set user from axios request to variable
-// make sure current user method works
-// show or hide the button

@@ -42,7 +42,7 @@
             <ul class="nav navbar-nav">
                 <!-- <li class="active"><a href="#home">Home</a></li> -->
                 <li><a href="/#/">Home</a></li>
-                <li><a href="/#/samples">Search Samples</a></li>
+                <li><a href="/#/search_samples">Search Samples</a></li>
                 <li><a href="/#/login">Login</a></li>
                 <li><a href="/#/logout">Logout</a></li>
                 <li><a href="/#/signup">Signup</a></li>
@@ -669,10 +669,10 @@
         <label>Password confirmation:</label>
         <input type="password" class="form-control" v-model="passwordConfirmation">
       </div>
-      <button class="btn btn-primary" v-on:click="submit()">Submit</button>
-    </div>
+      <!-- <button class="btn btn-primary" v-on:click="submit()">Submit</button> -->
+    
 
-      <!--  <h1> Upload a new sample</h1>
+       <h1> You must upload a sample to create a new account</h1>
    
     <p> Name: <input type="text" v-model="newSample.name"></p>
     <p> type: <input type="text" v-model="newSample.sample_type"></p>
@@ -683,9 +683,10 @@
       <div>
         Audio: <input id="fileUploadInput" type="file">
       </div>
- -->
+
  
-    <!-- <button v-on:click="uploadFile($event)">Add a Sample</button> -->
+    <button class="btn btn-primary"  v-on:click="uploadFile($event); submit(); ">Add a Sample</button>
+    </div>
 
   </div>
 </template>
@@ -718,4 +719,45 @@
     </div>
 
   </div>
+</template>
+
+
+
+<!-- search samples page -->
+
+<template id="search_samples-page">
+    <div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="container">
+            <div class="row pricing-table">
+                <p>Search for a sample:<input type="text" v-model="searchTerm"></p>
+                <!-- <div class="col-md-4" v-for="sample in samples" v-if="sample.name.includes(searchTerm)"> -->
+                    <div class="col-md-4" v-for="sample in samples" v-if="sample.name.includes(searchTerm)">
+                    <div class="panel panel-danger">
+                        <div class="panel-heading"><h3 class="text-center">{{sample.sample_type}}</h3></div>
+                        <div class="panel-body text-center">
+                            <p class="lead" style="font-size:40px"><strong>{{sample.name}}</strong></p>
+                        </div>
+                        <ul class="list-group list-group-flush text-center">
+                            <li class="list-group-item"><i class="icon-ok text-danger"></i> {{sample.bpm}}</li>
+                            <li class="list-group-item"><i class="icon-ok text-danger"></i> {{sample.sample_rate}}</li>
+                            <li class="list-group-item"><i class="icon-ok text-danger"></i> {{sample.user_id}}</li>
+                        </ul>
+                         <audio id="player" v-bind:src="sample.image" controls="true" v-if="currentUser" controlsList="download" > Your browser does not support the <code>audio</code> element.
+                        </audio>
+                         <audio  id="player" v-bind:src="sample.image" controls="true" v-else controlsList="nodownload" > Your browser does not support the <code>audio</code> element.
+                        </audio>
+                        <div class="panel-footer">
+                            <a class="btn btn-lg btn-block btn-danger"
+                               href="https://creativemarket.com/artlabs/12114-Bootstrap-3.0.-pricing-tables-flat">Add To Sample Cart</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
 </template>

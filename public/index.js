@@ -52,7 +52,8 @@ var SignupPage = {
       email: "",
       password: "",
       passwordConfirmation: "",
-      errors: []
+      errors: [],
+      newSample: { name: "" }
     };
   },
   methods: {
@@ -74,6 +75,33 @@ var SignupPage = {
             this.errors = error.response.data.errors;
           }.bind(this)
         );
+    },
+    uploadFile: function(event) {
+      var input = document.getElementById("fileUploadInput");
+      if (input.files.length > 0) {
+        var formData = new FormData();
+        formData.append("name", this.newSample.name);
+        formData.append("sample_type", this.newSample.sample_type);
+        formData.append("bpm", this.newSample.bpm);
+        formData.append("key", this.newSample.key);
+        formData.append("sample_rate", this.newSample.sample_rate);
+        formData.append("bit_depth", this.newSample.bit_depth);
+        formData.append("image", input.files[0]);
+
+        axios.post("http://localhost:3000/samples", formData).then(
+          function(response) {
+            console.log(response);
+            console.log(this);
+            this.newSample.name = "";
+            this.newSample.sample_type = "";
+            this.newSample.bpm = "";
+            this.newSample.key = "";
+            this.newSample.sample_rate = "";
+            this.newSample.bit_depth = "";
+            input.value = "";
+          }.bind(this)
+        );
+      }
     }
   }
 };
@@ -137,6 +165,37 @@ var HomePage = {
   computed: {}
 };
 
+var SearchSamplesPage = {
+  template: "#search_samples-page",
+  data: function() {
+    return {
+      message: "Audio Sample List",
+      currentUser: false,
+      searchTerm: "",
+      samples: []
+    };
+  },
+  created: function() {
+    axios.get("/samples").then(
+      function(response) {
+        this.samples = response.data;
+      }.bind(this)
+    );
+    axios.get("/current_user").then(
+      function(response) {
+        console.log(response.data);
+        if (response.data !== null) {
+          console.log("inside");
+          this.currentUser = true;
+        }
+      }.bind(this)
+    );
+  },
+  methods: {},
+
+  computed: {}
+};
+
 var CartedSamplePage = {
   template: "#carted_samples-page",
   data: function() {
@@ -163,7 +222,8 @@ var router = new VueRouter({
     { path: "/signup", component: SignupPage },
     { path: "/login", component: LoginPage },
     { path: "/logout", component: LogoutPage },
-    { path: "/carted_samples", component: CartedSamplePage }
+    { path: "/carted_samples", component: CartedSamplePage },
+    { path: "/search_samples", component: SearchSamplesPage }
   ],
 
   scrollBehavior: function(to, from, savedPosition) {

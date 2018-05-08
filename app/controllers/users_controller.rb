@@ -8,8 +8,8 @@ class UsersController < ApplicationController
     password: params[:password],
     password_confirmation: params[:password_confirmation]
     )
-    if user.save
-        
+
+    if user.save 
       sample = Sample.new(
       user_id: user.id, 
       name: params[:name], 

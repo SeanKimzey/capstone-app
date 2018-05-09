@@ -130,6 +130,8 @@ var HomePage = {
             input.value = "";
           }.bind(this)
         );
+        alert("Sample Uploaded Successfully");
+        router.push("/search_samples");
       }
     }
   },

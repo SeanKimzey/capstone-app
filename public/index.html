@@ -344,9 +344,9 @@
                         <p class="lead" style="font-size:40px"><strong>{{sample.name}}</strong></p>
                     </div>
                     <ul class="list-group list-group-flush text-center">
-                        <li class="list-group-item"><i class="icon-ok text-danger"></i> {{sample.bpm}}</li>
-                        <li class="list-group-item"><i class="icon-ok text-danger"></i> {{sample.sample_rate}}</li>
-                        <li class="list-group-item"><i class="icon-ok text-danger"></i> {{sample.user_id}}</li>
+                        <li class="list-group-item"><i class="icon-ok text-danger"></i> BPM: {{sample.bpm}}</li>
+                        <li class="list-group-item"><i class="icon-ok text-danger"></i> Sample Rate: {{sample.sample_rate}}</li>
+                        <li class="list-group-item"><i class="icon-ok text-danger"></i> Upload By: {{sample.user_id}}</li>
                     </ul>
                      <audio id="player" v-bind:src="sample.image" controls="true" v-if="currentUser" controlsList="download" > Your browser does not support the <code>audio</code> element.
                     </audio>
@@ -365,18 +365,101 @@
     </div>
 
        <h1> Upload a new sample</h1>
-   
-    <p> Name: <input type="text" v-model="newSample.name"></p>
-    <p> type: <input type="text" v-model="newSample.sample_type"></p>
-    <p> bpm: <input type="text" v-model="newSample.bpm"></p>
-    <p> key: <input type="text" v-model="newSample.key"></p>
-    <p> sample_rate: <input type="text" v-model="newSample.sample_rate"></p>
-    <p> bit_depth: <input type="text" v-model="newSample.bit_depth"></p>
+
+        Sample Type: 
+        <p>
+        <select v-model="newSample.sample_type">
+          <option disabled value="">Please select one</option>
+          <option>Drums</option>
+          <option>Guitar</option>
+          <option>Bass</option>
+          <option>Keys</option>
+          <option>Vox</option>
+          <option>Misc</option>
+        </select>
+        <span> {{ newSample.sample_type }} </span>
+        </p>
+
+        Sample Rate: 
+        <p>
+        <select v-model="newSample.sample_rate">
+          <option disabled value="">Please select one</option>
+          <option>44.1khz</option>
+          <option>48khz</option>
+          <option>88.2khz</option>
+          <option>96khz</option>
+          <option>176.4khz</option>
+          <option>192khz</option>
+        </select>
+        <span> {{ newSample.sample_rate }} </span>
+        </p>
+
+        Bit Depth: 
+        <p>
+        <select v-model="newSample.bit_depth">
+          <option disabled value="">Please select one</option>
+          <option>16bit</option>
+          <option>24bit</option>
+        </select>
+        <span> {{ newSample.bit_depth }} </span>
+        </p>
+
+        Key: 
+        <p>
+        <select v-model="newSample.key">
+          <option disabled value="">Please select one</option>
+          <option>n/a</option>
+          <option>B major</option>
+          <option>B♭ major</option>
+          <option>A major</option>
+          <option>A♭ major</option>
+          <option>G major</option>
+          <option>G♭ major</option>
+          <option>F# major</option>
+          <option>F major</option>
+          <option>E major</option>
+          <option>E♭ major</option>
+          <option>D major</option>
+          <option>D♭ major</option>
+          <option>C# major</option>
+          <option>C major</option>
+          <option>C♭ major</option>
+          <option>B minor</option>
+          <option>B♭ minor</option>
+          <option>A# minor</option>
+          <option>A minor</option>
+          <option>A♭ minor</option>
+          <option>G# minor</option>
+          <option>G minor</option>
+          <option>F# minor</option>
+          <option>F minor</option>
+          <option>E minor</option>
+          <option>E♭ minor</option>
+          <option>D# minor</option>
+          <option>D minor</option>
+          <option>C# minor</option>
+          <option>C minor</option>
+        </select>
+        <span> {{ newSample.key }} </span>
+        </p>
+
+         Sample Name: 
+        <p>
+        <input v-model="newSample.name" placeholder="ex: big snare">
+        <span>{{ newSample.name }}</span>
+        </p>
+
+        BPM: 
+        <p>
+        <input v-model="newSample.bpm" placeholder="enter a number">
+        <span>{{ newSample.bpm }} bpm</span>
+        </p>
+    
       <div>
         Audio: <input id="fileUploadInput" type="file">
       </div>
 
- 
+    <br>
     <button v-on:click="uploadFile($event)">Add a Sample</button>
 
 

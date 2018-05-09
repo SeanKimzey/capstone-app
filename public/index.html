@@ -19,6 +19,7 @@
     <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.js"></script>
     <script src="index.js" defer></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/wavesurfer.js/2.0.5/wavesurfer.min.js"></script>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -42,11 +43,12 @@
             <ul class="nav navbar-nav">
                 <!-- <li class="active"><a href="#home">Home</a></li> -->
                 <li><a href="/#/">Home</a></li>
-                <li><a href="/#/search_samples">Search Samples</a></li>
+                <li><a href="/#/search_samples">Search for Samples</a></li>
+                <li><a href="/#/sample_upload">Upload Samples</a></li>
                 <li><a href="/#/login">Login</a></li>
                 <li><a href="/#/logout">Logout</a></li>
                 <li><a href="/#/signup">Signup</a></li>
-                <li><a href="/#/carted_samples">Carted Samples</a></li>
+                <!-- <li><a href="/#/carted_samples">Carted Samples</a></li> -->
 
             </ul>
 
@@ -353,7 +355,9 @@
                     <div class="panel-footer">
                         <a class="btn btn-lg btn-block btn-danger"
                            href="https://creativemarket.com/artlabs/12114-Bootstrap-3.0.-pricing-tables-flat">Add To Sample Cart</a>
+
                     </div>
+                     
                 </div>
 
             </div>
@@ -734,7 +738,6 @@
         <div class="container">
             <div class="row pricing-table">
                 <p>Search for a sample:<input type="text" v-model="searchTerm"></p>
-                <!-- <div class="col-md-4" v-for="sample in samples" v-if="sample.name.includes(searchTerm)"> -->
                     <div class="col-md-4" v-for="sample in samples" v-if="sample.name.includes(searchTerm)">
                     <div class="panel panel-danger">
                         <div class="panel-heading"><h3 class="text-center">{{sample.sample_type}}</h3></div>
@@ -761,3 +764,20 @@
         </div>
     </div>
 </template>
+
+<!-- sample uplpoad page -->
+
+<template id="sample_upload-page">
+    <div class="vue-component">
+    <div>
+        <br>
+        <br>
+        <br>
+        <br>
+        hello
+    </div>
+</div>
+</template>
+
+
+

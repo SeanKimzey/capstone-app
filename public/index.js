@@ -114,6 +114,7 @@ var HomePage = {
       samples: [],
       newSample: { name: "" },
       currentUser: false
+      // wavesurfer: ""
     };
   },
   created: function() {
@@ -196,6 +197,63 @@ var SearchSamplesPage = {
   computed: {}
 };
 
+var SampleUploadPage = {
+  template: "#sample_upload-page",
+  data: function() {
+    return {
+      message: "Audio Sample List",
+      newSample: { name: "" }
+    };
+  },
+  created: function() {
+    axios.get("/samples").then(
+      function(response) {
+        this.samples = response.data;
+      }.bind(this)
+    );
+    axios.get("/current_user").then(
+      function(response) {
+        console.log(response.data);
+        if (response.data !== null) {
+          console.log("inside");
+          this.currentUser = true;
+        }
+      }.bind(this)
+    );
+  },
+  methods: {
+    uploadFile: function(event) {
+      var input = document.getElementById("fileUploadInput");
+      if (input.files.length > 0) {
+        var formData = new FormData();
+        formData.append("name", this.newSample.name);
+        formData.append("sample_type", this.newSample.sample_type);
+        formData.append("bpm", this.newSample.bpm);
+        formData.append("key", this.newSample.key);
+        formData.append("sample_rate", this.newSample.sample_rate);
+        formData.append("bit_depth", this.newSample.bit_depth);
+        formData.append("image", input.files[0]);
+
+        axios.post("http://localhost:3000/samples", formData).then(
+          function(response) {
+            console.log(response);
+            console.log(this);
+            this.newSample.name = "";
+            this.newSample.sample_type = "";
+            this.newSample.bpm = "";
+            this.newSample.key = "";
+            this.newSample.sample_rate = "";
+            this.newSample.bit_depth = "";
+            input.value = "";
+          }.bind(this)
+        );
+      }
+    }
+  },
+
+  computed: {}
+};
+
 var CartedSamplePage = {
   template: "#carted_samples-page",
   data: function() {
@@ -223,9 +281,9 @@ var router = new VueRouter({
     { path: "/login", component: LoginPage },
     { path: "/logout", component: LogoutPage },
     { path: "/carted_samples", component: CartedSamplePage },
-    { path: "/search_samples", component: SearchSamplesPage }
+    { path: "/search_samples", component: SearchSamplesPage },
+    { path: "/sample_upload", component: SampleUploadPage }
   ],
-
   scrollBehavior: function(to, from, savedPosition) {
     return { x: 0, y: 0 };
   }
@@ -233,5 +291,11 @@ var router = new VueRouter({
 
 var app = new Vue({
   el: "#vue-app",
-  router: router
+  router: router,
+  created: function() {
+    var jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      axios.defaults.headers.common["Authorization"] = jwt;
+    }
+  }
 });

@@ -52,8 +52,7 @@ var SignupPage = {
       email: "",
       password: "",
       passwordConfirmation: "",
-      errors: [],
-      newSample: { name: "" }
+      errors: []
     };
   },
   methods: {
@@ -75,33 +74,6 @@ var SignupPage = {
             this.errors = error.response.data.errors;
           }.bind(this)
         );
-    },
-    uploadFile: function(event) {
-      var input = document.getElementById("fileUploadInput");
-      if (input.files.length > 0) {
-        var formData = new FormData();
-        formData.append("name", this.newSample.name);
-        formData.append("sample_type", this.newSample.sample_type);
-        formData.append("bpm", this.newSample.bpm);
-        formData.append("key", this.newSample.key);
-        formData.append("sample_rate", this.newSample.sample_rate);
-        formData.append("bit_depth", this.newSample.bit_depth);
-        formData.append("image", input.files[0]);
-
-        axios.post("http://localhost:3000/samples", formData).then(
-          function(response) {
-            console.log(response);
-            console.log(this);
-            this.newSample.name = "";
-            this.newSample.sample_type = "";
-            this.newSample.bpm = "";
-            this.newSample.key = "";
-            this.newSample.sample_rate = "";
-            this.newSample.bit_depth = "";
-            input.value = "";
-          }.bind(this)
-        );
-      }
     }
   }
 };
@@ -114,7 +86,6 @@ var HomePage = {
       samples: [],
       newSample: { name: "" },
       currentUser: false
-      // wavesurfer: ""
     };
   },
   created: function() {

@@ -350,7 +350,7 @@
                     </ul>
                      <audio id="player" v-bind:src="sample.image" controls="true" v-if="currentUser" controlsList="download" > Your browser does not support the <code>audio</code> element.
                     </audio>
-                     <audio  id="player" v-bind:src="sample.image" controls="true" v-else controlsList="nodownload" > Your browser does not support the <code>audio</code> element.
+                     <audio  id="player" v-bind:src="sample.image" controls="true" v-else controlsList="nodownload"  > Your browser does not support the <code>audio</code> element.
                     </audio>
                     <div class="panel-footer">
                         <a class="btn btn-lg btn-block btn-danger"
@@ -673,24 +673,7 @@
         <label>Password confirmation:</label>
         <input type="password" class="form-control" v-model="passwordConfirmation">
       </div>
-      <!-- <button class="btn btn-primary" v-on:click="submit()">Submit</button> -->
-    
-
-       <h1> You must upload a sample to create a new account</h1>
-   
-    <p> Name: <input type="text" v-model="newSample.name"></p>
-    <p> type: <input type="text" v-model="newSample.sample_type"></p>
-    <p> bpm: <input type="text" v-model="newSample.bpm"></p>
-    <p> key: <input type="text" v-model="newSample.key"></p>
-    <p> sample_rate: <input type="text" v-model="newSample.sample_rate"></p>
-    <p> bit_depth: <input type="text" v-model="newSample.bit_depth"></p>
-      <div>
-        Audio: <input id="fileUploadInput" type="file">
-      </div>
-
- 
-    <button class="btn btn-primary"  v-on:click="uploadFile($event); submit(); ">Add a Sample</button>
-    </div>
+      <button class="btn btn-primary" v-on:click="submit()">Submit</button>
 
   </div>
 </template>

@@ -21,6 +21,7 @@ gem 'unirest'
 gem 'bcrypt', '~> 3.1.7'
 gem 'knock'
 gem "paperclip", "~> 6.0.0"
+gem 'paperclip-wav-mp3', '~> 0.0.4'
 # gem 'aws-sdk-s3', '~> 1.9'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

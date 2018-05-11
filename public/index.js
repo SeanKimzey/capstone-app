@@ -56,46 +56,90 @@ var SignupPage = {
     };
   },
   methods: {
-    submit: function() {
-      var params = {
-        first_name: this.first_name,
-        last_name: this.last_name,
-        email: this.email,
-        password: this.password,
-        password_confirmation: this.passwordConfirmation
-      };
-      axios
-        .post("/users", params)
-        .then(function(response) {
-          router.push("/login");
-        })
-        .catch(
-          function(error) {
-            this.errors = error.response.data.errors;
-          }.bind(this)
-        );
+    uploadFile: function(event) {
+      if (event.target.files.length > 0) {
+        var formData = new FormData();
+        formData.append("first_name", this.first_name);
+        formData.append("last_name", this.last_name);
+        formData.append("email", this.email);
+        formData.append("password", this.password);
+        formData.append("password_confirmation", this.passwordConfirmation);
+        formData.append("image", event.target.files[0]);
+
+        axios
+          .post("/users", formData)
+          .then(function(response) {
+            console.log(response);
+            router.push("/login");
+          })
+          .catch(
+            function(error) {
+              this.errors = error.response.data.errors;
+            }.bind(this)
+          );
+      }
     }
   }
 };
+
+// submit: function() {
+//     var params = {
+//       first_name: this.first_name,
+//       last_name: this.last_name,
+//       email: this.email,
+//       password: this.password,
+//       password_confirmation: this.passwordConfirmation
+//     };
+//     axios
+//       .post("/users", params)
+//       .then(function(response) {
+//         router.push("/login");
+//       })
+//       .catch(
+//         function(error) {
+//           this.errors = error.response.data.errors;
+//         }.bind(this)
+//       );
+//   }
 
 var HomePage = {
   template: "#home-page",
   data: function() {
     return {
       message: "Audio Sample List",
+      current_user: [],
       samples: [],
       newSample: { name: "" },
-      currentUser: false
+      currentUser: false,
+      song: "a.mp3"
     };
   },
-  created: function() {
+  mounted: function() {
     axios.get("/samples").then(
       function(response) {
         this.samples = response.data;
       }.bind(this)
     );
+    setTimeout(function() {
+      var wavesurfers = [].map.call(
+        document.querySelectorAll(".player"),
+        function(element) {
+          var wavesurfer = new WaveSurfer({
+            container: element,
+            waveColor: "violet",
+            progressColor: "purple"
+          });
+
+          wavesurfer.init();
+
+          return wavesurfer;
+        }
+      );
+    }, 3000);
+
     axios.get("/current_user").then(
       function(response) {
+        this.current_user = response.data;
         console.log(response.data);
         if (response.data !== null) {
           console.log("inside");
@@ -145,7 +189,8 @@ var SearchSamplesPage = {
     return {
       message: "Audio Sample List",
       currentUser: false,
-      searchTerm: "",
+      searchName: "",
+      searchType: "",
       samples: []
     };
   },
@@ -165,7 +210,18 @@ var SearchSamplesPage = {
       }.bind(this)
     );
   },
-  methods: {},
+  methods: {
+    isValidSample: function(inputSample) {
+      var validName = inputSample.name
+        .toLowerCase()
+        .includes(this.searchName.toLowerCase());
+      var validType = inputSample.sample_type
+        .toLowerCase()
+        .includes(this.searchType.toLowerCase());
+
+      return validName && validType;
+    }
+  },
 
   computed: {}
 };

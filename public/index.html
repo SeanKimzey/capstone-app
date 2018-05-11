@@ -18,8 +18,8 @@
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.js"></script>
-    <script src="index.js" defer></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/wavesurfer.js/2.0.5/wavesurfer.min.js"></script>
+    <script src="index.js" defer></script>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -42,6 +42,7 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <!-- <li class="active"><a href="#home">Home</a></li> -->
+ 
                 <li><a href="/#/">Home</a></li>
                 <li><a href="/#/search_samples">Search for Samples</a></li>
                 <li><a href="/#/sample_upload">Upload Samples</a></li>
@@ -51,6 +52,8 @@
                 <!-- <li><a href="/#/carted_samples">Carted Samples</a></li> -->
 
             </ul>
+
+
 
         </div>
         <!--/.navbar-collapse -->
@@ -109,10 +112,12 @@
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="jumbotron" id="home">
     <div class="container">
-        <div class="media">
+        <div class="w3-display-container">
+            <!-- <div class="w3-display-topleft w3-container"><img v-bind:src="current_user.image" height="42" width="42" ></div> -->
             <a href="#" class="pull-right"><img class="media-object" src=""/></a>
             <div class="media-body" >
                 <div class="col-md-12">
+                    
                     <h1 class="title"><span>Sample Bin</span></h1>
                     <h1 class="title">Total samples uploaded:<span> {{samples.length}}</span></h1>
                     
@@ -205,7 +210,7 @@
                             <div class="feature-box-info">
                                 <h4 class="shorter">Customer Support</h4>
 
-                                <p class="tall">Lorem ipsum dolor sit amet, consectetur adip.</p>
+                                <p class="tall">placeholder</p>
                             </div>
                         </div>
                         <div class="feature-box">
@@ -326,6 +331,8 @@
             <div class="col-md-12 pricing-intro">
                 <h2 class="page-headline large text-center">Tell your projects awesome story.</h2>
 
+                
+
                 <p class="text-center">Tell your projects awesome story. Tell your projects awesome story. Tell your
                     projects awesome story. Tell your projects awesome story.</p>
             </div>
@@ -336,8 +343,10 @@
 
     <div class="container">
 
+
         <div class="row pricing-table">
             <div class="col-md-4" v-for="sample in samples">
+                
                 <div class="panel panel-danger">
                     <div class="panel-heading"><h3 class="text-center">{{sample.sample_type}}</h3></div>
                     <div class="panel-body text-center">
@@ -348,21 +357,22 @@
                         <li class="list-group-item"><i class="icon-ok text-danger"></i> Sample Rate: {{sample.sample_rate}}</li>
                         <li class="list-group-item"><i class="icon-ok text-danger"></i> Upload By: {{sample.user_id}}</li>
                     </ul>
-                     <audio id="player" v-bind:src="sample.image" controls="true" v-if="currentUser" controlsList="download" > Your browser does not support the <code>audio</code> element.
+                     <audio class="player" v-bind:src="sample.image" controls="true" v-if="currentUser" controlsList="download" > Your browser does not support the <code>audio</code> element.
                     </audio>
-                     <audio  id="player" v-bind:src="sample.image" controls="true" v-else controlsList="nodownload"  > Your browser does not support the <code>audio</code> element.
+                     <audio  class="player" v-bind:src="sample.image" controls="true" v-else controlsList="nodownload"  > Your browser does not support the <code>audio</code> element.
                     </audio>
-                    <div class="panel-footer">
-                        <a class="btn btn-lg btn-block btn-danger"
-                           href="https://creativemarket.com/artlabs/12114-Bootstrap-3.0.-pricing-tables-flat">Add To Sample Cart</a>
-
+                    <div class="panel-footer">    
                     </div>
+                    <div id="element"></div>
                      
                 </div>
 
             </div>
         </div>
     </div>
+
+   
+
 
        <h1> Upload a new sample</h1>
 
@@ -756,7 +766,10 @@
         <label>Password confirmation:</label>
         <input type="password" class="form-control" v-model="passwordConfirmation">
       </div>
-      <button class="btn btn-primary" v-on:click="submit()">Submit</button>
+      <div>
+        Image: <input type="file" v-on:change="uploadFile($event)">
+      </div>
+      <!-- <button class="btn btn-primary" v-on:click="submit()">Submit</button> -->
 
   </div>
 </template>
@@ -803,8 +816,9 @@
         <br>
         <div class="container">
             <div class="row pricing-table">
-                <p>Search for a sample:<input type="text" v-model="searchTerm"></p>
-                    <div class="col-md-4" v-for="sample in samples" v-if="sample.name.includes(searchTerm)">
+                <p>Search by Sample Name:<input type="text" v-model="searchName"></p>
+                <p>Search by Sample Type:<input type="text" v-model="searchType"></p>
+                    <div class="col-md-4" v-for="sample in samples" v-if="isValidSample(sample)">
                     <div class="panel panel-danger">
                         <div class="panel-heading"><h3 class="text-center">{{sample.sample_type}}</h3></div>
                         <div class="panel-body text-center">
@@ -815,9 +829,9 @@
                             <li class="list-group-item"><i class="icon-ok text-danger"></i> {{sample.sample_rate}}</li>
                             <li class="list-group-item"><i class="icon-ok text-danger"></i> {{sample.user_id}}</li>
                         </ul>
-                         <audio id="player" v-bind:src="sample.image" controls="true" v-if="currentUser" controlsList="download" > Your browser does not support the <code>audio</code> element.
+                         <audio class="player" v-bind:src="sample.image" controls="true" v-if="currentUser" controlsList="download" > Your browser does not support the <code>audio</code> element.
                         </audio>
-                         <audio  id="player" v-bind:src="sample.image" controls="true" v-else controlsList="nodownload" > Your browser does not support the <code>audio</code> element.
+                         <audio  class="player" v-bind:src="sample.image" controls="true" v-else controlsList="nodownload" > Your browser does not support the <code>audio</code> element.
                         </audio>
                         <div class="panel-footer">
                             <a class="btn btn-lg btn-block btn-danger"
@@ -841,7 +855,107 @@
         <br>
         <br>
         hello
+
+    <div>
+    <h1> Upload a new sample</h1>
+
+        Sample Type: 
+        <p>
+        <select v-model="newSample.sample_type">
+          <option disabled value="">Please select one</option>
+          <option>Drums</option>
+          <option>Guitar</option>
+          <option>Bass</option>
+          <option>Keys</option>
+          <option>Vox</option>
+          <option>Misc</option>
+        </select>
+        <span> {{ newSample.sample_type }} </span>
+        </p>
+
+        Sample Rate: 
+        <p>
+        <select v-model="newSample.sample_rate">
+          <option disabled value="">Please select one</option>
+          <option>44.1khz</option>
+          <option>48khz</option>
+          <option>88.2khz</option>
+          <option>96khz</option>
+          <option>176.4khz</option>
+          <option>192khz</option>
+        </select>
+        <span> {{ newSample.sample_rate }} </span>
+        </p>
+
+        Bit Depth: 
+        <p>
+        <select v-model="newSample.bit_depth">
+          <option disabled value="">Please select one</option>
+          <option>16bit</option>
+          <option>24bit</option>
+        </select>
+        <span> {{ newSample.bit_depth }} </span>
+        </p>
+
+        Key: 
+        <p>
+        <select v-model="newSample.key">
+          <option disabled value="">Please select one</option>
+          <option>n/a</option>
+          <option>B major</option>
+          <option>B♭ major</option>
+          <option>A major</option>
+          <option>A♭ major</option>
+          <option>G major</option>
+          <option>G♭ major</option>
+          <option>F# major</option>
+          <option>F major</option>
+          <option>E major</option>
+          <option>E♭ major</option>
+          <option>D major</option>
+          <option>D♭ major</option>
+          <option>C# major</option>
+          <option>C major</option>
+          <option>C♭ major</option>
+          <option>B minor</option>
+          <option>B♭ minor</option>
+          <option>A# minor</option>
+          <option>A minor</option>
+          <option>A♭ minor</option>
+          <option>G# minor</option>
+          <option>G minor</option>
+          <option>F# minor</option>
+          <option>F minor</option>
+          <option>E minor</option>
+          <option>E♭ minor</option>
+          <option>D# minor</option>
+          <option>D minor</option>
+          <option>C# minor</option>
+          <option>C minor</option>
+        </select>
+        <span> {{ newSample.key }} </span>
+        </p>
+
+         Sample Name: 
+        <p>
+        <input v-model="newSample.name" placeholder="ex: big snare">
+        <span>{{ newSample.name }}</span>
+        </p>
+
+        BPM: 
+        <p>
+        <input v-model="newSample.bpm" placeholder="enter a number">
+        <span>{{ newSample.bpm }} bpm</span>
+        </p>
+    
+      <div>
+        Audio: <input id="fileUploadInput" type="file">
+      </div>
+
+    <br>
+    <button v-on:click="uploadFile($event)">Add a Sample</button>
     </div>
+</div>
 </div>
 </template>
 

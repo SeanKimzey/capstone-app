@@ -82,6 +82,8 @@ GEM
       mime-types
       mimemagic (~> 0.3.0)
       terrapin (~> 0.6.0)
+    paperclip-wav-mp3 (0.0.4)
+      paperclip (>= 2.7.0)
     pg (1.0.0)
     puma (3.11.3)
     rack (2.0.4)
@@ -147,6 +149,7 @@ DEPENDENCIES
   knock
   listen (>= 3.0.5, < 3.2)
   paperclip (~> 6.0.0)
+  paperclip-wav-mp3 (~> 0.0.4)
   pg (>= 0.18, < 2.0)
   puma (~> 3.7)
   rails (~> 5.1.6)

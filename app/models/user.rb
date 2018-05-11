@@ -6,4 +6,20 @@ class User < ApplicationRecord
   # validates :first_name, presence: true
   # validates :last_name, presence: true
   validates :email, presence: true, uniqueness: true
+  has_attached_file :image
+  validates_attachment :image,
+    content_type: {
+      content_type: ["image/jpeg", "image/gif", "image/png"]
+    }
+
+
+  def as_json
+    {
+      first_name: first_name,
+      last_name: last_name,
+      email: email, 
+      image: image.url
+    }
+  end
+
 end

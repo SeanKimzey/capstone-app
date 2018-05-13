@@ -47,10 +47,10 @@
                 <!-- <li><a href="/#/carted_samples">Carted Samples</a></li> -->
             </ul>
 
-            
-             <img  id="profile-image" v-bind:src="current_user.image" height="42" width="42" >
-           
 
+            
+             <img  id="profile-image" v-if="current_user" v-bind:src="current_user.image" height="42" width="42" >
+           
 
 
         </div>
@@ -105,6 +105,8 @@
 </body>
 </html>
 
+
+
 <template id="home-page">
   <div class="vue-component">
 <!-- Main jumbotron for a primary marketing message or call to action -->
@@ -118,6 +120,7 @@
                     
                     <h1 class="title"><span>Sample Bin</span></h1>
                     <h1 class="title">Total samples uploaded:<span> {{samples.length}}</span></h1>
+
                     
                     <!-- <p><a class="btn btn-success btn-lg">Learn more <i class="icon icon-angle-right"></i></a></p> -->
                 </div>
@@ -166,7 +169,7 @@
                 <div>
                 <span class="icon-stack icon-4x">
   <i class="icon-circle icon-stack-base"></i>
-  <i class="icon-upload icon-light"></i>
+  <i class="icon-download icon-light"></i>
 </span>
                 </div>
                 <h2>And Totally <span style="color:#248822">Free</span></h2>

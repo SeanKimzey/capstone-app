@@ -4,6 +4,7 @@ var LogoutPage = {
   created: function() {
     axios.defaults.headers.common["Authorization"] = undefined;
     localStorage.removeItem("jwt");
+    location.reload(true);
     router.push("/");
     alert("You successfully logged out!");
   }
@@ -39,6 +40,18 @@ var LoginPage = {
             this.password = "";
           }.bind(this)
         );
+      axios.get("/current_user").then(
+        function(response) {
+          console.log("in login page printing current user");
+          console.log(this.$parent.current_user);
+          this.$parent.current_user = response.data;
+          console.log(this.$parent.current_user);
+          console.log(response.data);
+          if (response.data !== null) {
+            console.log("inside");
+          }
+        }.bind(this)
+      );
     }
   }
 };
@@ -108,14 +121,15 @@ var HomePage = {
   data: function() {
     return {
       message: "Audio Sample List",
-      current_user: [],
       samples: [],
       newSample: { name: "" },
-      currentUser: false,
-      song: "a.mp3"
+      song: "a.mp3",
+      currentUser: false
     };
   },
   mounted: function() {
+    console.log("here is the user");
+    console.log(this.$parent.current_user);
     axios.get("/samples").then(
       function(response) {
         this.samples = response.data;
@@ -176,6 +190,7 @@ var HomePage = {
           }.bind(this)
         );
         alert("Sample Uploaded Successfully");
+        location.reload(true);
         router.push("/search_samples");
       }
     }
@@ -224,7 +239,7 @@ var SearchSamplesPage = {
       var validKey = inputSample.key
         .toLowerCase()
         .includes(this.searchKey.toLowerCase());
-      var validBPM = inputSample.validBPM
+      var validBPM = inputSample.bpm
         .toString()
         .includes(this.searchBPM.toString());
 
@@ -336,7 +351,7 @@ var app = new Vue({
   router: router,
   data: function() {
     return {
-      current_user: []
+      current_user: null
     };
   },
   created: function() {

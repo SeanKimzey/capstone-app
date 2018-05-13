@@ -21,11 +21,6 @@
     <script src="http://cdnjs.cloudflare.com/ajax/libs/wavesurfer.js/2.0.5/wavesurfer.min.js"></script>
     <script src="index.js" defer></script>
 
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="bootstrap/js/html5shiv.js"></script>
-    <script src="bootstrap/js/respond.min.js"></script>
-    <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#topnav">
 	  <div id="vue-app">
@@ -50,8 +45,11 @@
                 <li><a href="/#/logout">Logout</a></li>
                 <li><a href="/#/signup">Signup</a></li>
                 <!-- <li><a href="/#/carted_samples">Carted Samples</a></li> -->
-
             </ul>
+
+            
+             <img  id="profile-image" v-bind:src="current_user.image" height="42" width="42" >
+           
 
 
 
@@ -766,10 +764,23 @@
         <label>Password confirmation:</label>
         <input type="password" class="form-control" v-model="passwordConfirmation">
       </div>
+
       <div>
-        Image: <input type="file" v-on:change="uploadFile($event)">
+        Image: <input id="imageUploadInput" type="file">
       </div>
+
+      <br>
+
+       <button v-on:click="createAccount($event)">Create Account</button>
       <!-- <button class="btn btn-primary" v-on:click="submit()">Submit</button> -->
+
+
+      <!-- <div>
+        Audio: <input id="fileUploadInput" type="file">
+      </div>
+
+    <br>
+    <button v-on:click="uploadFile($event)">Add a Sample</button> -->
 
   </div>
 </template>
@@ -818,6 +829,9 @@
             <div class="row pricing-table">
                 <p>Search by Sample Name:<input type="text" v-model="searchName"></p>
                 <p>Search by Sample Type:<input type="text" v-model="searchType"></p>
+                <p>Search by Sample Key:<input type="text" v-model="searchKey"></p>
+                <p>Search by BPM:<input type="text" v-model="searchBPM"></p>
+
                     <div class="col-md-4" v-for="sample in samples" v-if="isValidSample(sample)">
                     <div class="panel panel-danger">
                         <div class="panel-heading"><h3 class="text-center">{{sample.sample_type}}</h3></div>
@@ -827,15 +841,15 @@
                         <ul class="list-group list-group-flush text-center">
                             <li class="list-group-item"><i class="icon-ok text-danger"></i> {{sample.bpm}}</li>
                             <li class="list-group-item"><i class="icon-ok text-danger"></i> {{sample.sample_rate}}</li>
-                            <li class="list-group-item"><i class="icon-ok text-danger"></i> {{sample.user_id}}</li>
+                            <li class="list-group-item"><i class="icon-ok text-danger"></i> {{sample.key}}</li>
                         </ul>
                          <audio class="player" v-bind:src="sample.image" controls="true" v-if="currentUser" controlsList="download" > Your browser does not support the <code>audio</code> element.
                         </audio>
                          <audio  class="player" v-bind:src="sample.image" controls="true" v-else controlsList="nodownload" > Your browser does not support the <code>audio</code> element.
                         </audio>
                         <div class="panel-footer">
-                            <a class="btn btn-lg btn-block btn-danger"
-                               href="https://creativemarket.com/artlabs/12114-Bootstrap-3.0.-pricing-tables-flat">Add To Sample Cart</a>
+                            <!-- <a class="btn btn-lg btn-block btn-danger"
+                               href="https://creativemarket.com/artlabs/12114-Bootstrap-3.0.-pricing-tables-flat">Add To Sample Cart</a> -->
                         </div>
                     </div>
 
@@ -854,8 +868,6 @@
         <br>
         <br>
         <br>
-        hello
-
     <div>
     <h1> Upload a new sample</h1>
 

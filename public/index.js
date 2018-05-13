@@ -56,15 +56,16 @@ var SignupPage = {
     };
   },
   methods: {
-    uploadFile: function(event) {
-      if (event.target.files.length > 0) {
+    createAccount: function(event) {
+      var userInput = document.getElementById("imageUploadInput");
+      if (userInput.files.length > 0) {
         var formData = new FormData();
         formData.append("first_name", this.first_name);
         formData.append("last_name", this.last_name);
         formData.append("email", this.email);
         formData.append("password", this.password);
         formData.append("password_confirmation", this.passwordConfirmation);
-        formData.append("image", event.target.files[0]);
+        formData.append("image", userInput.files[0]);
 
         axios
           .post("/users", formData)
@@ -139,7 +140,7 @@ var HomePage = {
 
     axios.get("/current_user").then(
       function(response) {
-        this.current_user = response.data;
+        this.$parent.current_user = response.data;
         console.log(response.data);
         if (response.data !== null) {
           console.log("inside");
@@ -191,6 +192,8 @@ var SearchSamplesPage = {
       currentUser: false,
       searchName: "",
       searchType: "",
+      searchKey: "",
+      searchBPM: "",
       samples: []
     };
   },
@@ -218,8 +221,14 @@ var SearchSamplesPage = {
       var validType = inputSample.sample_type
         .toLowerCase()
         .includes(this.searchType.toLowerCase());
+      var validKey = inputSample.key
+        .toLowerCase()
+        .includes(this.searchKey.toLowerCase());
+      var validBPM = inputSample.validBPM
+        .toString()
+        .includes(this.searchBPM.toString());
 
-      return validName && validType;
+      return validName && validType && validKey && validBPM;
     }
   },
 
@@ -276,6 +285,10 @@ var SampleUploadPage = {
             input.value = "";
           }.bind(this)
         );
+        router.push("/");
+        alert("Sample Uploaded Successfully");
+        router.push("/search_samples");
+        location.reload(true);
       }
     }
   },
@@ -321,6 +334,11 @@ var router = new VueRouter({
 var app = new Vue({
   el: "#vue-app",
   router: router,
+  data: function() {
+    return {
+      current_user: []
+    };
+  },
   created: function() {
     var jwt = localStorage.getItem("jwt");
     if (jwt) {

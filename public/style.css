@@ -561,3 +561,8 @@ footer *{
 .propic {
     text-align: 
 }
+
+#profile-image {
+    border-radius: 50%;
+    float: right;
+}

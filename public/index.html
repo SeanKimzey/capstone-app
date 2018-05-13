@@ -34,22 +34,21 @@
             </button>
             <!-- <a class="navbar-brand" href="#"><img src="images/expose-logo.png" alt="Expose" height="17px" /> </a> -->
         </div>
-        <div class="navbar-collapse collapse">
+        <div id="mynavbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <!-- <li class="active"><a href="#home">Home</a></li> -->
  
                 <li><a href="/#/">Home</a></li>
                 <li><a href="/#/search_samples">Search for Samples</a></li>
-                <li><a href="/#/sample_upload">Upload Samples</a></li>
-                <li><a href="/#/login">Login</a></li>
-                <li><a href="/#/logout">Logout</a></li>
-                <li><a href="/#/signup">Signup</a></li>
-                <!-- <li><a href="/#/carted_samples">Carted Samples</a></li> -->
+                <li><a v-if="current_user" href="/#/sample_upload">Upload Samples</a></li>
+                <li><a v-if="current_user === null" href="/#/login">Login</a></li>
+                <li><a v-if="current_user" href="/#/logout">Logout</a></li>
+                <li><a v-if="current_user === null" href="/#/signup">Signup</a></li>
             </ul>
 
 
             
-             <img  id="profile-image" v-if="current_user" v-bind:src="current_user.image" height="42" width="42" >
+             <img  id="profile-image" v-if="current_user" v-bind:src="current_user.image" height="37" width="37" >
            
 
 
@@ -65,7 +64,7 @@
     <div class="container">
         <div class="row">
             <div class="footer-ribbon" style="right: 0">
-                <h3 class="title" style="margin: 0;padding: 5px 10px">Thank <span>You</span></h3>
+                <h3 class="title" style="margin: 0;padding: 5px 10px">You're <span>Welcome</span></h3>
             </div>
 
         </div>
@@ -136,9 +135,9 @@
             <div class="single-fet">
                 <div>
                 <span class="icon-stack icon-4x">
-  <i class="icon-circle icon-stack-base"></i>
-  <i class="icon-music icon-light"></i>
-</span>
+                  <i class="icon-circle icon-stack-base"></i>
+                  <i class="icon-music icon-light"></i>
+                </span>
                 </div>
                 <h2>With Bootstrap <span class="label label-warning">3.0</span></h2>
 
@@ -152,9 +151,9 @@
             <div class="single-fet">
                 <div>
                 <span class="icon-stack icon-4x">
-  <i class="icon-circle icon-stack-base"></i>
-  <i class="icon-headphones icon-light"></i>
-</span>
+                  <i class="icon-circle icon-stack-base"></i>
+                  <i class="icon-headphones icon-light"></i>
+                </span>
                 </div>
                 <h2>Fully Responsive</h2>
 
@@ -190,7 +189,7 @@
 <section class="slider" id="features">
     <div class="container">
         <div class="inner-page">
-            <h2 class="page-headline large text-center">Tell your projects awesome story.</h2>
+            <h2 class="page-headline large text-center">Upload a Sample Here</h2>
 
             <p class="text-center">Tell your projects awesome story. Tell your projects awesome story. Tell your
                 projects awesome story. Tell your projects awesome story.</p>
@@ -200,183 +199,12 @@
                 <!--<img data-original="images/mockup.png" src="images/mockup.png" alt="Looks great on every device"-->
                 <!--class="lazy">-->
 
-                <h2>Our <strong>Features</strong></h2>
+                <!-- <h2>Our <strong>Features</strong></h2> -->
 
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="feature-box">
-                            <div class="feature-box-icon">
-                                <i class="icon-group"></i>
-                            </div>
-                            <div class="feature-box-info">
-                                <h4 class="shorter">Customer Support</h4>
+                <div id="uploadhome" class="container">
+     <!--   <h1> Upload a new sample</h1> -->
 
-                                <p class="tall">placeholder</p>
-                            </div>
-                        </div>
-                        <div class="feature-box">
-                            <div class="feature-box-icon">
-                                <i class="icon-file"></i>
-                            </div>
-                            <div class="feature-box-info">
-                                <h4 class="shorter">HTML5 / CSS3 / JS</h4>
-
-                                <p class="tall">Lorem ipsum dolor sit amet, adip.</p>
-                            </div>
-                        </div>
-                        <div class="feature-box">
-                            <div class="feature-box-icon">
-                                <i class="icon-google-plus"></i>
-                            </div>
-                            <div class="feature-box-info">
-                                <h4 class="shorter">500+ Google Fonts</h4>
-
-                                <p class="tall">Lorem ipsum dolor sit amet, consectetur adip.</p>
-                            </div>
-                        </div>
-                        <div class="feature-box">
-                            <div class="feature-box-icon">
-                                <i class="icon-adjust"></i>
-                            </div>
-                            <div class="feature-box-info">
-                                <h4 class="shorter">Colors</h4>
-
-                                <p class="tall">Lorem ipsum dolor sit amet, consectetur adip.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="feature-box">
-                            <div class="feature-box-icon">
-                                <i class="icon-film"></i>
-                            </div>
-                            <div class="feature-box-info">
-                                <h4 class="shorter">Sliders</h4>
-
-                                <p class="tall">Lorem ipsum dolor sit amet, consectetur.</p>
-                            </div>
-                        </div>
-                        <div class="feature-box">
-                            <div class="feature-box-icon">
-                                <i class="icon-magic small user"></i>
-                            </div>
-                            <div class="feature-box-info">
-                                <h4 class="shorter">Icons</h4>
-
-                                <p class="tall">Lorem ipsum dolor sit amet, consectetur adip.</p>
-                            </div>
-                        </div>
-                        <div class="feature-box">
-                            <div class="feature-box-icon">
-                                <i class="icon-reorder"></i>
-                            </div>
-                            <div class="feature-box-info">
-                                <h4 class="shorter">Buttons</h4>
-
-                                <p class="tall">Lorem ipsum dolor sit, consectetur adip.</p>
-                            </div>
-                        </div>
-                        <div class="feature-box">
-                            <div class="feature-box-icon">
-                                <i class="icon-desktop"></i>
-                            </div>
-                            <div class="feature-box-info">
-                                <h4 class="shorter">Lightbox</h4>
-
-                                <p class="tall">Lorem sit amet, consectetur adip.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-md-4 col-md-pull-8">
-                <div class="list-group">
-                    <a href="#" class="list-group-item active">
-                        <h4 class="list-group-item-heading">List group item heading</h4>
-
-                        <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Fusce dapibus,
-                            tellus ac cursus commodo, tortor </p>
-                    </a>
-                    <a href="#" class="list-group-item">
-                        <h4 class="list-group-item-heading">List group item heading</h4>
-
-                        <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Fusce dapibus,
-                            tellus ac cursus commodo, tortor </p>
-                    </a>
-                    <a href="#" class="list-group-item">
-                        <h4 class="list-group-item-heading">List group item heading</h4>
-
-                        <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Fusce dapibus,
-                            tellus ac cursus commodo, tortor </p>
-                    </a>
-                    <a href="#" class="list-group-item">
-                        <h4 class="list-group-item-heading">List group item heading</h4>
-
-                        <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Fusce dapibus,
-                            tellus ac cursus commodo, tortor </p>
-                    </a>
-
-                </div>
-
-
-            </div>
-        </div>
-    </div>
-</section>
-
-<section class="pricing" id="pricing">
-
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 pricing-intro">
-                <h2 class="page-headline large text-center">Tell your projects awesome story.</h2>
-
-                
-
-                <p class="text-center">Tell your projects awesome story. Tell your projects awesome story. Tell your
-                    projects awesome story. Tell your projects awesome story.</p>
-            </div>
-        </div>
-    </div>
-
-<!-- samples index -->
-
-    <div class="container">
-
-
-        <div class="row pricing-table">
-            <div class="col-md-4" v-for="sample in samples">
-                
-                <div class="panel panel-danger">
-                    <div class="panel-heading"><h3 class="text-center">{{sample.sample_type}}</h3></div>
-                    <div class="panel-body text-center">
-                        <p class="lead" style="font-size:40px"><strong>{{sample.name}}</strong></p>
-                    </div>
-                    <ul class="list-group list-group-flush text-center">
-                        <li class="list-group-item"><i class="icon-ok text-danger"></i> BPM: {{sample.bpm}}</li>
-                        <li class="list-group-item"><i class="icon-ok text-danger"></i> Sample Rate: {{sample.sample_rate}}</li>
-                        <li class="list-group-item"><i class="icon-ok text-danger"></i> Upload By: {{sample.user_id}}</li>
-                    </ul>
-                     <audio class="player" v-bind:src="sample.image" controls="true" v-if="currentUser" controlsList="download" > Your browser does not support the <code>audio</code> element.
-                    </audio>
-                     <audio  class="player" v-bind:src="sample.image" controls="true" v-else controlsList="nodownload"  > Your browser does not support the <code>audio</code> element.
-                    </audio>
-                    <div class="panel-footer">    
-                    </div>
-                    <div id="element"></div>
-                     
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-   
-
-
-       <h1> Upload a new sample</h1>
-
+       <div id="sampletype">
         Sample Type: 
         <p>
         <select v-model="newSample.sample_type">
@@ -390,6 +218,7 @@
         </select>
         <span> {{ newSample.sample_type }} </span>
         </p>
+        </div>
 
         Sample Rate: 
         <p>
@@ -405,6 +234,8 @@
         <span> {{ newSample.sample_rate }} </span>
         </p>
 
+
+        <div id="bitdepth">
         Bit Depth: 
         <p>
         <select v-model="newSample.bit_depth">
@@ -414,6 +245,7 @@
         </select>
         <span> {{ newSample.bit_depth }} </span>
         </p>
+        </div>
 
         Key: 
         <p>
@@ -454,11 +286,13 @@
         <span> {{ newSample.key }} </span>
         </p>
 
+        <div id="samplename">
          Sample Name: 
         <p>
         <input v-model="newSample.name" placeholder="ex: big snare">
         <span>{{ newSample.name }}</span>
         </p>
+        </div>
 
         BPM: 
         <p>
@@ -466,17 +300,77 @@
         <span>{{ newSample.bpm }} bpm</span>
         </p>
     
-      <div>
-        Audio: <input id="fileUploadInput" type="file">
-      </div>
-
+      
+        Audio: 
+       
+        <input class="fileupload" id="fileUploadInput" type="file">     
     <br>
     <button v-on:click="uploadFile($event)">Add a Sample</button>
+</div>
+
+          
+            <div class="col-md-4 col-md-pull-8">
+                <div class="list-group">
+                    
+
+                </div>
 
 
-
-
+            </div>
+        </div>
+    </div>
 </section>
+
+<section class="pricing" id="pricing">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 pricing-intro">
+                <h2 class="page-headline large text-center">Tell your projects awesome story.</h2>
+
+                
+
+                <p class="text-center">Tell your projects awesome story. Tell your projects awesome story. Tell your
+                    projects awesome story. Tell your projects awesome story.</p>
+            </div>
+        </div>
+    </div>
+
+<!-- samples index -->
+
+    <div class="container">
+
+
+        <div class="row pricing-table">
+            <div class="col-md-4" v-for="sample in samples">
+                
+                <div class="panel panel-danger">
+                    <div class="panel-heading"><h3 class="text-center">{{sample.sample_type}}</h3></div>
+                    <div class="panel-body text-center">
+                        <p class="lead" style="font-size:40px"><strong>{{sample.name}}</strong></p>
+                    </div>
+                    <ul class="list-group list-group-flush text-center">
+                        <li class="list-group-item"></i> BPM: {{sample.bpm}}</li>
+                        <li class="list-group-item"></i> Sample Rate: {{sample.sample_rate}}</li>
+                        <li class="list-group-item"></i> Upload By: {{sample.user_id}}</li>
+                    </ul>
+                     <audio class="player" v-bind:src="sample.image" controls="true" v-if="currentUser" controlsList="download" > Your browser does not support the <code>audio</code> element.
+                    </audio>
+                     <audio  class="player" v-bind:src="sample.image" controls="true" v-else controlsList="nodownload"  > Your browser does not support the <code>audio</code> element.
+                    </audio>
+                    <div class="panel-footer">    
+                    </div>
+                    <div id="element"></div>
+                     
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </section>
+
+   
+
 <section class="gray">
     <div class="container">
         <div class="row">
@@ -768,27 +662,18 @@
         <input type="password" class="form-control" v-model="passwordConfirmation">
       </div>
 
-      <div>
-        Image: <input id="imageUploadInput" type="file">
+      <div class="form-group">
+        <label>Image:</label>
+        <input id="imageUploadInput" type="file">
       </div>
 
       <br>
 
        <button v-on:click="createAccount($event)">Create Account</button>
-      <!-- <button class="btn btn-primary" v-on:click="submit()">Submit</button> -->
-
-
-      <!-- <div>
-        Audio: <input id="fileUploadInput" type="file">
-      </div>
-
-    <br>
-    <button v-on:click="uploadFile($event)">Add a Sample</button> -->
-
+       <br>
+       <br>
   </div>
 </template>
-
-
 
 <!-- Login  -->
 
@@ -826,10 +711,9 @@
     <div>
         <br>
         <br>
-        <br>
-        <br>
         <div class="container">
             <div class="row pricing-table">
+                <h1>Search:</h1>
                 <p>Search by Sample Name:<input type="text" v-model="searchName"></p>
                 <p>Search by Sample Type:<input type="text" v-model="searchType"></p>
                 <p>Search by Sample Key:<input type="text" v-model="searchKey"></p>
@@ -866,14 +750,25 @@
 
 <template id="sample_upload-page">
     <div class="vue-component">
-    <div>
-        <br>
-        <br>
-        <br>
-        <br>
-    <div>
-    <h1> Upload a new sample</h1>
+   <section class="slider" id="features">
+    <div class="container">
+        <div class="inner-page">
+            <h2 class="page-headline large text-center">Upload a Sample Here</h2>
 
+            <p class="text-center">Tell your projects awesome story. Tell your projects awesome story. Tell your
+                projects awesome story. Tell your projects awesome story.</p>
+        </div>
+        <div class="row inner-page">
+            <div class="col-md-8 col-md-push-4 lazy-container loaded">
+                <!--<img data-original="images/mockup.png" src="images/mockup.png" alt="Looks great on every device"-->
+                <!--class="lazy">-->
+
+                <!-- <h2>Our <strong>Features</strong></h2> -->
+
+                <div id="uploadhome" class="container">
+     <!--   <h1> Upload a new sample</h1> -->
+
+       <div id="sampletype">
         Sample Type: 
         <p>
         <select v-model="newSample.sample_type">
@@ -887,6 +782,7 @@
         </select>
         <span> {{ newSample.sample_type }} </span>
         </p>
+        </div>
 
         Sample Rate: 
         <p>
@@ -902,6 +798,8 @@
         <span> {{ newSample.sample_rate }} </span>
         </p>
 
+
+        <div id="bitdepth">
         Bit Depth: 
         <p>
         <select v-model="newSample.bit_depth">
@@ -911,6 +809,7 @@
         </select>
         <span> {{ newSample.bit_depth }} </span>
         </p>
+        </div>
 
         Key: 
         <p>
@@ -951,11 +850,13 @@
         <span> {{ newSample.key }} </span>
         </p>
 
+        <div id="samplename">
          Sample Name: 
         <p>
         <input v-model="newSample.name" placeholder="ex: big snare">
         <span>{{ newSample.name }}</span>
         </p>
+        </div>
 
         BPM: 
         <p>
@@ -963,14 +864,26 @@
         <span>{{ newSample.bpm }} bpm</span>
         </p>
     
-      <div>
-        Audio: <input id="fileUploadInput" type="file">
-      </div>
-
+      
+        Audio: 
+       
+        <input class="fileupload" id="fileUploadInput" type="file">     
     <br>
     <button v-on:click="uploadFile($event)">Add a Sample</button>
-    </div>
 </div>
+
+          
+            <div class="col-md-4 col-md-pull-8">
+                <div class="list-group">
+                    
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</section>
 </div>
 </template>
 

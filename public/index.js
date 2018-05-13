@@ -300,33 +300,13 @@ var SampleUploadPage = {
             input.value = "";
           }.bind(this)
         );
+        location.reload(true);
         router.push("/");
         alert("Sample Uploaded Successfully");
-        router.push("/search_samples");
-        location.reload(true);
+        // router.push("/search_samples");
       }
     }
   },
-
-  computed: {}
-};
-
-var CartedSamplePage = {
-  template: "#carted_samples-page",
-  data: function() {
-    return {
-      message: "Your Carted Samples",
-      carted_samples: []
-    };
-  },
-  created: function() {
-    axios.get("/carted_samples").then(
-      function(response) {
-        this.carted_samples = response.data;
-      }.bind(this)
-    );
-  },
-  methods: {},
 
   computed: {}
 };
@@ -337,7 +317,6 @@ var router = new VueRouter({
     { path: "/signup", component: SignupPage },
     { path: "/login", component: LoginPage },
     { path: "/logout", component: LogoutPage },
-    { path: "/carted_samples", component: CartedSamplePage },
     { path: "/search_samples", component: SearchSamplesPage },
     { path: "/sample_upload", component: SampleUploadPage }
   ],

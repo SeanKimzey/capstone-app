@@ -565,4 +565,24 @@ footer *{
 #profile-image {
     border-radius: 50%;
     float: right;
+    padding: 5px;
+
 }
+
+#mynavbar {
+    float: left;
+}
+
+#sampletype {
+    float: left;
+}
+
+#bitdepth {
+    float: left;
+}
+
+#samplename {
+    float: center;
+}
+
+

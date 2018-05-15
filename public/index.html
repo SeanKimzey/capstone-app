@@ -36,18 +36,15 @@
         <div id="mynavbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <!-- <li class="active"><a href="#home">Home</a></li> -->
- 
+                <li><img  id="waveformpic" src="images/waveform3.png" height="50" width="50" ></li>
                 <li><a href="/#/">Home</a></li>
                 <li><a href="/#/search_samples">Search for Samples</a></li>
                 <li><a v-if="current_user" href="/#/sample_upload">Upload Samples</a></li>
                 <li><a v-if="current_user === null" href="/#/login">Login</a></li>
                 <li><a v-if="current_user" href="/#/logout">Logout</a></li>
                 <li><a v-if="current_user === null" href="/#/signup">Signup</a></li>
+                <img  id="profile-image" v-if="current_user" v-bind:src="current_user.image" height="50" width="50" >
             </ul>
-
-
-            
-             <img  id="profile-image" v-if="current_user" v-bind:src="current_user.image" height="37" width="37" >
            
 
 
@@ -55,6 +52,8 @@
         <!--/.navbar-collapse -->
     </div>
 </div>
+
+
 
     <router-view></router-view>
 
@@ -107,18 +106,19 @@
 
 <template id="home-page">
   <div class="vue-component">
-<!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="jumbotron" id="home">
     <div class="container">
         <div class="w3-display-container">
             <a href="#" class="pull-right"><img class="media-object" src=""/></a>
             <div class="media-body" >
-                <div class="col-md-12">                  
+                <div class="col-md-12">
+                    <br>
+                    <br>
+                    <br>
+                <h1 class="title">Total samples uploaded:<span> {{samples.length}}</span></h1>                  
                     <h1 class="title"><span>Sample Bin</span></h1>
-                    <h1 class="title">Total samples uploaded:<span> {{samples.length}}</span></h1>
+                    
 
-
-                    <div id="waveform"></div>
 
                 </div>
             </div>

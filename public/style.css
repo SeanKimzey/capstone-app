@@ -209,7 +209,7 @@ fieldset[disabled] .btn-primary.active {
 }
 
 .jumbotron{
-    background: url(images/studio1.png);
+    background: url(images/guitar1.jpg);
     color: #ffffff;
     background-attachment: fixed;
 }
@@ -566,6 +566,15 @@ footer *{
     border-radius: 50%;
     float: right;
     padding: 5px;
+}
+
+#profile-image {
+    border-radius: 50%;
+    float: right;
+    padding: 5px;
+}
+.ifloggedin {
+    float: right;
 
 }
 

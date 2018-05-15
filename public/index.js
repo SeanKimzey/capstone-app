@@ -96,32 +96,17 @@ var SignupPage = {
   }
 };
 
-// submit: function() {
-//     var params = {
-//       first_name: this.first_name,
-//       last_name: this.last_name,
-//       email: this.email,
-//       password: this.password,
-//       password_confirmation: this.passwordConfirmation
-//     };
-//     axios
-//       .post("/users", params)
-//       .then(function(response) {
-//         router.push("/login");
-//       })
-//       .catch(
-//         function(error) {
-//           this.errors = error.response.data.errors;
-//         }.bind(this)
-//       );
-//   }
-
 var HomePage = {
   template: "#home-page",
   data: function() {
     return {
       message: "Audio Sample List",
       samples: [],
+      guitarSamples: [],
+      bassSamples: [],
+      keysSamples: [],
+      voxSamples: [],
+
       newSample: { name: "" },
       song: "a.mp3",
       currentUser: false
@@ -135,21 +120,36 @@ var HomePage = {
         this.samples = response.data;
       }.bind(this)
     );
+    axios.get("/guitar").then(
+      function(response) {
+        this.guitarSamples = response.data;
+      }.bind(this)
+    );
+    axios.get("/bass").then(
+      function(response) {
+        this.bassSamples = response.data;
+      }.bind(this)
+    );
+    axios.get("/keys").then(
+      function(response) {
+        this.keysSamples = response.data;
+      }.bind(this)
+    );
+    axios.get("/vox").then(
+      function(response) {
+        this.voxSamples = response.data;
+      }.bind(this)
+    );
     setTimeout(function() {
-      var wavesurfers = [].map.call(
-        document.querySelectorAll(".player"),
-        function(element) {
-          var wavesurfer = new WaveSurfer({
-            container: element,
-            waveColor: "violet",
-            progressColor: "purple"
-          });
-
-          wavesurfer.init();
-
-          return wavesurfer;
-        }
-      );
+      var wavesurfer = Wavesurfer.create({
+        container: "#waveform",
+        waveColor: "red",
+        progressColor: "purple",
+        hideScrollbar: true
+      });
+      wavesurfer.load("a.mp3");
+      console.log("hey");
+      return wavesurfer;
     }, 3000);
 
     axios.get("/current_user").then(
@@ -196,6 +196,25 @@ var HomePage = {
     }
   },
 
+  computed: {}
+};
+
+var DrumsPage = {
+  template: "#drums-page",
+  data: function() {
+    return {
+      message: "Drum Samples",
+      samples: []
+    };
+  },
+  created: function() {
+    axios.get("/drums").then(
+      function(response) {
+        this.samples = response.data;
+      }.bind(this)
+    );
+  },
+  methods: {},
   computed: {}
 };
 
@@ -314,6 +333,7 @@ var SampleUploadPage = {
 var router = new VueRouter({
   routes: [
     { path: "/", component: HomePage },
+    { path: "/drums", component: DrumsPage },
     { path: "/signup", component: SignupPage },
     { path: "/login", component: LoginPage },
     { path: "/logout", component: LogoutPage },

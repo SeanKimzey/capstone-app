@@ -46,6 +46,31 @@ class SamplesController < ApplicationController
     render json: {message: "This sample has been deleted"}
   end
 
+  def drums
+    samples = Sample.all.order(:id).where("sample_type LIKE ?","%Drums%")
+    render json: samples.as_json
+  end
+
+  def guitar
+    samples = Sample.all.order(:id).where("sample_type LIKE ?","%Guitar%")
+    render json: samples.as_json
+  end
+
+  def bass
+    samples = Sample.all.order(:id).where("sample_type LIKE ?","%Bass%")
+    render json: samples.as_json
+  end
+
+  def keys
+    samples = Sample.all.order(:id).where("sample_type LIKE ?","%Keys%")
+    render json: samples.as_json
+  end
+
+  def vox
+    samples = Sample.all.order(:id).where("sample_type LIKE ?","%Vox%")
+    render json: samples.as_json
+  end
+
 end
 
 

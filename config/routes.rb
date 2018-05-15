@@ -9,6 +9,11 @@ Rails.application.routes.draw do
    # samples routes 
 
   get "/samples" => "samples#index"
+  get "/drums" => "samples#drums"
+  get "/guitar" => "samples#guitar"
+  get "/bass" => "samples#bass"
+  get "/keys" => "samples#keys"
+  get "/vox" => "samples#vox"
   get "/samples/:id" => "samples#show"
   post "/samples" => "samples#create" 
   post "/samples/:id" => "samples#update"

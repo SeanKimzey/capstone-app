@@ -32,7 +32,6 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <!-- <a class="navbar-brand" href="#"><img src="images/expose-logo.png" alt="Expose" height="17px" /> </a> -->
         </div>
         <div id="mynavbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -112,16 +111,15 @@
 <div class="jumbotron" id="home">
     <div class="container">
         <div class="w3-display-container">
-            <!-- <div class="w3-display-topleft w3-container"><img v-bind:src="current_user.image" height="42" width="42" ></div> -->
             <a href="#" class="pull-right"><img class="media-object" src=""/></a>
             <div class="media-body" >
-                <div class="col-md-12">
-                    
+                <div class="col-md-12">                  
                     <h1 class="title"><span>Sample Bin</span></h1>
                     <h1 class="title">Total samples uploaded:<span> {{samples.length}}</span></h1>
 
-                    
-                    <!-- <p><a class="btn btn-success btn-lg">Learn more <i class="icon icon-angle-right"></i></a></p> -->
+
+                    <div id="waveform"></div>
+
                 </div>
             </div>
         </div>
@@ -407,8 +405,9 @@
                                         <div class="carousel-inner">
                                             <div class="item active">
                                                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 item animate_afc d1 animate_start">
-                                                    <div class="item-inner"><a style="cursor: pointer;"><img
+                                                    <div class="item-inner"><a href="/#/drums" style="cursor: pointer;"><img
                                                             src="images/logo-1.png" alt="Upportdash"></a></div>
+                                                                            <!-- <li><a href="/#/search_samples">Search for Samples</a></li> -->
                                                 </div>
                                                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6 item animate_afc d2 animate_start">
                                                     <div class="item-inner"><a style="cursor: pointer;"><img
@@ -885,6 +884,40 @@
     </div>
 </section>
 </div>
+</template>
+
+
+<template id="drums-page">
+  <div class="vue-component">
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+       <div class="row pricing-table">
+        <div class="col-md-4" v-for="sample in samples">
+            <div class="panel panel-danger">
+                <div class="panel-heading"><h3 class="text-center">{{sample.sample_type}}</h3></div>
+                <div class="panel-body text-center">
+                    <p class="lead" style="font-size:40px"><strong>{{sample.name}}</strong></p>
+                </div>
+                <ul class="list-group list-group-flush text-center">
+                    <li class="list-group-item"></i> BPM: {{sample.bpm}}</li>
+                    <li class="list-group-item"></i> Sample Rate: {{sample.sample_rate}}</li>
+                    <li class="list-group-item"></i> Upload By: {{sample.user_id}}</li>
+                </ul>
+                 <audio class="player" v-bind:src="sample.image" controls="true" v-if="currentUser" controlsList="download" > Your browser does not support the <code>audio</code> element.
+                </audio>
+                 <audio  class="player" v-bind:src="sample.image" controls="true" v-else controlsList="nodownload"  > Your browser does not support the <code>audio</code> element.
+                </audio>
+                <div class="panel-footer">    
+                </div>
+                <div id="element"></div>
+            </div>
+            </div>
+        </div>
+  </div>
 </template>
 
 

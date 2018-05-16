@@ -71,6 +71,11 @@ class SamplesController < ApplicationController
     render json: samples.as_json
   end
 
+    def misc
+    samples = Sample.all.order(:id).where("sample_type LIKE ?","%Misc%")
+    render json: samples.as_json
+  end
+
 end
 
 

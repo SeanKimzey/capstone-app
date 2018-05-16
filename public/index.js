@@ -123,32 +123,17 @@ var HomePage = {
         this.samples = response.data;
       }.bind(this)
     );
-    axios.get("/bass").then(
-      function(response) {
-        this.bassSamples = response.data;
-      }.bind(this)
-    );
-    axios.get("/keys").then(
-      function(response) {
-        this.keysSamples = response.data;
-      }.bind(this)
-    );
-    axios.get("/vox").then(
-      function(response) {
-        this.voxSamples = response.data;
-      }.bind(this)
-    );
-    setTimeout(function() {
-      var wavesurfer = Wavesurfer.create({
-        container: "#waveform",
-        waveColor: "red",
-        progressColor: "purple",
-        hideScrollbar: true
-      });
-      wavesurfer.load("a.mp3");
-      console.log("hey");
-      return wavesurfer;
-    }, 3000);
+    // setTimeout(function() {
+    //   var wavesurfer = Wavesurfer.create({
+    //     container: "#waveform",
+    //     waveColor: "red",
+    //     progressColor: "purple",
+    //     hideScrollbar: true
+    //   });
+    //   wavesurfer.load("a.mp3");
+    //   console.log("hey");
+    //   return wavesurfer;
+    // }, 3000);
 
     axios.get("/current_user").then(
       function(response) {
@@ -352,6 +337,37 @@ var BassPage = {
   computed: {}
 };
 
+var MiscPage = {
+  template: "#misc-page",
+  data: function() {
+    return {
+      message: "Misc. Samples",
+      samples: [],
+      currentUser: false
+    };
+  },
+  created: function() {
+    axios.get("/misc").then(
+      function(response) {
+        this.samples = response.data;
+      }.bind(this)
+    );
+
+    axios.get("/current_user").then(
+      function(response) {
+        this.$parent.current_user = response.data;
+        console.log(response.data);
+        if (response.data !== null) {
+          console.log("inside");
+          this.currentUser = true;
+        }
+      }.bind(this)
+    );
+  },
+  methods: {},
+  computed: {}
+};
+
 var SearchSamplesPage = {
   template: "#search_samples-page",
   data: function() {
@@ -471,6 +487,7 @@ var router = new VueRouter({
     { path: "/keys", component: KeysPage },
     { path: "/guitar", component: GuitarPage },
     { path: "/vox", component: VoxPage },
+    { path: "/misc", component: MiscPage },
     { path: "/bass", component: BassPage },
     { path: "/signup", component: SignupPage },
     { path: "/login", component: LoginPage },

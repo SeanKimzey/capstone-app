@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get "/bass" => "samples#bass"
   get "/keys" => "samples#keys"
   get "/vox" => "samples#vox"
+  get "/misc" => "samples#misc"
   get "/samples/:id" => "samples#show"
   post "/samples" => "samples#create" 
   post "/samples/:id" => "samples#update"

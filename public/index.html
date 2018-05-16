@@ -29,15 +29,14 @@
         <div class="navbar-header">
             <h1 type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"></h1>
                 <a class="navbar-brand" href="#"><img src="images/SampleBin.png" alt="Expose" height="25px"> </a>
+               <!--  <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
+            </button> -->
         </div>
         <div id="mynavbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li> </li>
-                <!-- <li><img  id="waveformpic" src="images/SampleBin.png" height="35" width="300" ></li> -->
                 <li><a href="/#/">Home</a></li>
                 <li><a href="/#/search_samples">Search for Samples</a></li>
                 <li><a v-if="current_user" href="/#/sample_upload">Upload Samples</a></li>
@@ -62,9 +61,9 @@
 <footer id="footer">
     <div class="container">
         <div class="row">
-            <div class="footer-ribbon" style="right: 0">
+           <!--  <div class="footer-ribbon" style="right: 0">
                 <h3 class="title" style="margin: 0;padding: 5px 10px">You're <span>Welcome</span></h3>
-            </div>
+            </div> -->
 
         </div>
     </div>
@@ -77,15 +76,15 @@
                     </a>
                 </div>
                 <div class="col-md-5">
-                    <p>&copy; Copyright 2018 by Sean Kimzey. All Rights Reserved.</p>
+                    <p>&copy; Copyright 2018 by Sean Kimzey</p>
                 </div>
                 <div class="col-md-5">
                     <nav id="footer-menu">
-                        <ul>
+                       <!--  <ul>
                             <li><a href="#">FAQ's</a></li>
                             <li><a href="#">Sitemap</a></li>
                             <li><a href="#">Contact</a></li>
-                        </ul>
+                        </ul> -->
                     </nav>
                 </div>
             </div>
@@ -114,7 +113,7 @@
             <div class="media-body" >
                 <div class="col-md-12">
                    
-                    <h1 class="title"><span>Sample Bin</span></h1>
+                    <h1 class="title"><span>Share your favorite audio samples</span></h1>
                 <h1 class="title">Total samples uploaded:<span> {{samples.length}}</span></h1>  
                 <br>                
                 <br>
@@ -137,11 +136,9 @@
                   <i class="icon-music icon-light"></i>
                 </span>
                 </div>
-                <h2>With Bootstrap <span class="label label-warning">3.0</span></h2>
+                <h2>Sign up and start sharing samples <span class="label label-warning"></span></h2>
 
-                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor
-                    mauris
-                    condimentum nibh, ut fermentum massa justo sit amet. </p>
+                <p> </p>
 
             </div>
         </div>
@@ -153,11 +150,9 @@
                   <i class="icon-headphones icon-light"></i>
                 </span>
                 </div>
-                <h2>Fully Responsive</h2>
+                <h2>Browse samples for inspiration</h2>
 
-                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor
-                    mauris
-                    condimentum nibh, ut fermentum massa justo sit amet. </p>
+                <p></p>
 
             </div>
         </div>
@@ -169,11 +164,9 @@
   <i class="icon-download icon-light"></i>
 </span>
                 </div>
-                <h2>And Totally <span style="color:#248822">Free</span></h2>
+                <h2>Download unlimited samples</h2>
 
-                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor
-                    mauris
-                    condimentum nibh, ut fermentum massa justo sit amet. </p>
+                <p></p>
 
             </div>
         </div>
@@ -189,8 +182,7 @@
         <div class="inner-page">
             <h2  class="page-headline large text-center">Upload a Sample Here</h2>
 
-            <p class="text-center">Tell your projects awesome story. Tell your projects awesome story. Tell your
-                projects awesome story. Tell your projects awesome story.</p>
+            <p class="text-center">*Sample uploads must be mp3 files and 2mb or under in size*</p>
         </div>
         <div class="row inner-page">
             <div class="col-md-8 col-md-push-4 lazy-container loaded">
@@ -368,16 +360,16 @@
 
    
 
-<section class="gray">
+<!-- <section class="gray">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h3 class="text-center">Search by sample type:</h3>
+                <h3 class="text-center">Browse all samples for a specific instrument:</h3>
             </div>
         </div>
     </div>
-</section>
-<section class="about" id="clients">
+</section> -->
+<!-- <section class="about" id="clients">
     <div class="dmask">
 
         <div class="our-clients">
@@ -429,9 +421,9 @@
         </div>
 
     </div>
-</section>
+</section> -->
 
-<section class="contact" id="contact">
+<!-- <section class="contact" id="contact">
 
     <div class="container">
 
@@ -499,7 +491,7 @@
 
     </div>
 
-</section>
+</section> -->
 </div>
 </template>
 
@@ -644,16 +636,10 @@
         <div class="inner-page">
             <h2 class="page-headline large text-center">Upload a Sample Here</h2>
 
-            <p class="text-center">Tell your projects awesome story. Tell your projects awesome story. Tell your
-                projects awesome story. Tell your projects awesome story.</p>
+            <p class="text-center">*Sample uploads must be mp3 files and 2mb or under in size*</p>
         </div>
         <div class="row inner-page">
             <div class="col-md-8 col-md-push-4 lazy-container loaded">
-                <!--<img data-original="images/mockup.png" src="images/mockup.png" alt="Looks great on every device"-->
-                <!--class="lazy">-->
-
-                <!-- <h2>Our <strong>Features</strong></h2> -->
-
                 <div id="uploadhome" class="container">
 
        <div id="sampletype">
@@ -763,11 +749,7 @@
           
             <div class="col-md-4 col-md-pull-8">
                 <div class="list-group">
-                    
-
                 </div>
-
-
             </div>
         </div>
     </div>
@@ -794,7 +776,7 @@
                 <ul class="list-group list-group-flush text-center">
                     <li class="list-group-item"></i> BPM: {{sample.bpm}}</li>
                     <li class="list-group-item"></i> Sample Rate: {{sample.sample_rate}}</li>
-                    <li class="list-group-item"></i> Upload By: {{sample.user_id}}</li>
+                    <!-- <li class="list-group-item"></i> Upload By: {{sample.user_id}}</li> -->
                 </ul>
                  <audio class="player" v-bind:src="sample.image" controls="true" v-if="currentUser" controlsList="download" > Your browser does not support the <code>audio</code> element.
                 </audio>

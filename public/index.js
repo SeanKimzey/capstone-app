@@ -204,13 +204,25 @@ var DrumsPage = {
   data: function() {
     return {
       message: "Drum Samples",
-      samples: []
+      samples: [],
+      currentUser: false
     };
   },
   created: function() {
     axios.get("/drums").then(
       function(response) {
         this.samples = response.data;
+      }.bind(this)
+    );
+
+    axios.get("/current_user").then(
+      function(response) {
+        this.$parent.current_user = response.data;
+        console.log(response.data);
+        if (response.data !== null) {
+          console.log("inside");
+          this.currentUser = true;
+        }
       }.bind(this)
     );
   },

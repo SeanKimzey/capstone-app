@@ -85,10 +85,14 @@ var SignupPage = {
           .then(function(response) {
             console.log(response);
             router.push("/login");
+            alert(
+              "You successfully created your Sample Bin account! Please log in."
+            );
           })
           .catch(
             function(error) {
               this.errors = error.response.data.errors;
+              console.log(this.errors);
             }.bind(this)
           );
       }
@@ -106,7 +110,6 @@ var HomePage = {
       bassSamples: [],
       keysSamples: [],
       voxSamples: [],
-
       newSample: { name: "" },
       song: "a.mp3",
       currentUser: false
@@ -118,11 +121,6 @@ var HomePage = {
     axios.get("/samples").then(
       function(response) {
         this.samples = response.data;
-      }.bind(this)
-    );
-    axios.get("/guitar").then(
-      function(response) {
-        this.guitarSamples = response.data;
       }.bind(this)
     );
     axios.get("/bass").then(
@@ -210,6 +208,130 @@ var DrumsPage = {
   },
   created: function() {
     axios.get("/drums").then(
+      function(response) {
+        this.samples = response.data;
+      }.bind(this)
+    );
+
+    axios.get("/current_user").then(
+      function(response) {
+        this.$parent.current_user = response.data;
+        console.log(response.data);
+        if (response.data !== null) {
+          console.log("inside");
+          this.currentUser = true;
+        }
+      }.bind(this)
+    );
+  },
+  methods: {},
+  computed: {}
+};
+
+var KeysPage = {
+  template: "#keys-page",
+  data: function() {
+    return {
+      message: "Keys Samples",
+      samples: [],
+      currentUser: false
+    };
+  },
+  created: function() {
+    axios.get("/keys").then(
+      function(response) {
+        this.samples = response.data;
+      }.bind(this)
+    );
+
+    axios.get("/current_user").then(
+      function(response) {
+        this.$parent.current_user = response.data;
+        console.log(response.data);
+        if (response.data !== null) {
+          console.log("inside");
+          this.currentUser = true;
+        }
+      }.bind(this)
+    );
+  },
+  methods: {},
+  computed: {}
+};
+
+var GuitarPage = {
+  template: "#guitar-page",
+  data: function() {
+    return {
+      message: "Guitar Samples",
+      samples: [],
+      currentUser: false
+    };
+  },
+  created: function() {
+    axios.get("/guitar").then(
+      function(response) {
+        this.samples = response.data;
+      }.bind(this)
+    );
+
+    axios.get("/current_user").then(
+      function(response) {
+        this.$parent.current_user = response.data;
+        console.log(response.data);
+        if (response.data !== null) {
+          console.log("inside");
+          this.currentUser = true;
+        }
+      }.bind(this)
+    );
+  },
+  methods: {},
+  computed: {}
+};
+
+var VoxPage = {
+  template: "#vox-page",
+  data: function() {
+    return {
+      message: "Vox Samples",
+      samples: [],
+      currentUser: false
+    };
+  },
+  created: function() {
+    axios.get("/vox").then(
+      function(response) {
+        this.samples = response.data;
+      }.bind(this)
+    );
+
+    axios.get("/current_user").then(
+      function(response) {
+        this.$parent.current_user = response.data;
+        console.log(response.data);
+        if (response.data !== null) {
+          console.log("inside");
+          this.currentUser = true;
+        }
+      }.bind(this)
+    );
+  },
+  methods: {},
+  computed: {}
+};
+
+var BassPage = {
+  template: "#bass-page",
+  data: function() {
+    return {
+      message: "Bass Samples",
+      samples: [],
+      currentUser: false
+    };
+  },
+  created: function() {
+    axios.get("/bass").then(
       function(response) {
         this.samples = response.data;
       }.bind(this)
@@ -346,6 +468,10 @@ var router = new VueRouter({
   routes: [
     { path: "/", component: HomePage },
     { path: "/drums", component: DrumsPage },
+    { path: "/keys", component: KeysPage },
+    { path: "/guitar", component: GuitarPage },
+    { path: "/vox", component: VoxPage },
+    { path: "/bass", component: BassPage },
     { path: "/signup", component: SignupPage },
     { path: "/login", component: LoginPage },
     { path: "/logout", component: LogoutPage },

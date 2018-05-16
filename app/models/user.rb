@@ -9,6 +9,7 @@ class User < ApplicationRecord
     content_type: {
       content_type: ["image/jpeg", "image/gif", "image/png"]
     }
+  validates :image, presence: true
 
 
   def as_json

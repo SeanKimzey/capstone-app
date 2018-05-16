@@ -237,7 +237,7 @@
         <p>
         <select v-model="newSample.key">
           <option disabled value="">Please select one</option>
-          <option>n/a</option>
+          <option>---</option>
           <option>B major</option>
           <option>B♭ major</option>
           <option>A major</option>
@@ -314,7 +314,7 @@
         <div class="row">
             <div class="col-md-12">
                 <h2 class="page-headline large text-center">Preview audio samples here:</h2>
-                <p class="text-center">Please create an account and log in to download samples.</p>
+                <p class="text-center">You must create an account and log in to download samples.</p>
             </div>
         </div>
     </div>
@@ -340,8 +340,9 @@
                     </div>
                     <ul class="list-group list-group-flush text-center">
                         <li class="list-group-item"></i> BPM: {{sample.bpm}}</li>
+                        <li class="list-group-item"></i> Key: {{sample.key}}</li>
                         <li class="list-group-item"></i> Sample Rate: {{sample.sample_rate}}</li>
-                        <li class="list-group-item"></i> Upload By: {{sample.user_id}}</li>
+                        <li class="list-group-item"></i> Bit Depth: {{sample.bit_depth}}</li>
                     </ul>
                      <audio class="player" v-bind:src="sample.image" controls="true" v-if="currentUser" controlsList="download" > Your browser does not support the <code>audio</code> element.
                     </audio>
@@ -360,7 +361,7 @@
 
    
 
-<!-- <section class="gray">
+<section class="gray">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -368,8 +369,8 @@
             </div>
         </div>
     </div>
-</section> -->
-<!-- <section class="about" id="clients">
+</section>
+<section class="about" id="clients">
     <div class="dmask">
 
         <div class="our-clients">
@@ -388,22 +389,22 @@
                                                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6 item animate_afc d1 animate_start">
                                                     <div class="item-inner"><a href="/#/drums" style="cursor: pointer;"><img
                                                             src="images/drums.png" alt="Upportdash"></a></div>
-                                                                            <!-- <li><a href="/#/search_samples">Search for Samples</a></li> -->
+                                                                           
                                                 </div>
                                                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6 item animate_afc d2 animate_start">
-                                                    <div class="item-inner"><a style="cursor: pointer;"><img
+                                                    <div class="item-inner"><a href="/#/keys" style="cursor: pointer;"><img
                                                             src="images/keys.png" alt="Upportdash"></a></div>
                                                 </div>
                                                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6 item animate_afc d3 animate_start">
-                                                    <div class="item-inner"><a style="cursor: pointer;"><img
+                                                    <div class="item-inner"><a href="/#/guitar"style="cursor: pointer;"><img
                                                             src="images/guitar.png" alt="Upportdash"></a></div>
                                                 </div>
                                                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6 item animate_afc d4 animate_start">
-                                                    <div class="item-inner"><a style="cursor: pointer;"><img
+                                                    <div class="item-inner"><a href="/#/vox"style="cursor: pointer;"><img
                                                             src="images/vox.png" alt="Upportdash"></a></div>
                                                 </div>
                                                  <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6 item animate_afc d4 animate_start">
-                                                    <div class="item-inner"><a style="cursor: pointer;"><img
+                                                    <div class="item-inner"><a href="/#/bass" style="cursor: pointer;"><img
                                                             src="images/bass.png" alt="Upportdash"></a></div>
                                                 </div>
 
@@ -421,7 +422,7 @@
         </div>
 
     </div>
-</section> -->
+</section>
 
 <!-- <section class="contact" id="contact">
 
@@ -518,8 +519,10 @@
   <div class="vue-component">
 
     <div class="container">
-        <hr>
-        <hr>
+        <br>
+        <br>
+
+
       <h1>Signup</h1>
       <ul>
         <li class="text-danger" v-for="error in errors">{{ error }}</li>
@@ -552,7 +555,7 @@
 
       <br>
 
-       <button v-on:click="createAccount($event)">Create Account</button>
+       <button class="btn btn-primary" v-on:click="createAccount($event)">Create Account</button>
        <br>
        <br>
   </div>
@@ -597,10 +600,11 @@
         <div class="container">
             <div class="row pricing-table">
                 <h1>Search:</h1>
-                <p>Search by Sample Name:<input type="text" v-model="searchName"></p>
-                <p>Search by Sample Type:<input type="text" v-model="searchType"></p>
-                <p>Search by Sample Key:<input type="text" v-model="searchKey"></p>
+                <p>Search by Name:<input type="text" v-model="searchName"></p>
+                <p>Search by Instrument:<input type="text" v-model="searchType"></p>
                 <p>Search by BPM:<input type="text" v-model="searchBPM"></p>
+                <p>Search by Key:<input type="text" v-model="searchKey"></p>
+                
 
                     <div class="col-md-4" v-for="sample in samples" v-if="isValidSample(sample)">
                     <div class="panel panel-danger">
@@ -609,9 +613,10 @@
                             <p class="lead" style="font-size:40px"><strong>{{sample.name}}</strong></p>
                         </div>
                         <ul class="list-group list-group-flush text-center">
-                            <li class="list-group-item"><i class="icon-ok text-danger"></i> {{sample.bpm}}</li>
-                            <li class="list-group-item"><i class="icon-ok text-danger"></i> {{sample.sample_rate}}</li>
-                            <li class="list-group-item"><i class="icon-ok text-danger"></i> {{sample.key}}</li>
+                            <li class="list-group-item">BPM:</i> {{sample.bpm}}</li>
+                            <li class="list-group-item">Key:</i> {{sample.key}}</li>
+                            <li class="list-group-item">Sample Rate:</i> {{sample.sample_rate}}</li>
+                            <li class="list-group-item">Bit Depth:</i> {{sample.bit_depth}}</li>
                         </ul>
                          <audio class="player" v-bind:src="sample.image" controls="true" v-if="currentUser" controlsList="download" > Your browser does not support the <code>audio</code> element.
                         </audio>
@@ -689,7 +694,7 @@
         <p>
         <select v-model="newSample.key">
           <option disabled value="">Please select one</option>
-          <option>n/a</option>
+          <option>---</option>
           <option>B major</option>
           <option>B♭ major</option>
           <option>A major</option>
@@ -775,8 +780,149 @@
                 </div>
                 <ul class="list-group list-group-flush text-center">
                     <li class="list-group-item"></i> BPM: {{sample.bpm}}</li>
+                    <li class="list-group-item"></i> Key: {{sample.key}}</li>
                     <li class="list-group-item"></i> Sample Rate: {{sample.sample_rate}}</li>
-                    <!-- <li class="list-group-item"></i> Upload By: {{sample.user_id}}</li> -->
+                    <li class="list-group-item"></i> Bit Depth: {{sample.bit_depth}}</li>
+                </ul>
+                 <audio class="player" v-bind:src="sample.image" controls="true" v-if="currentUser" controlsList="download" > Your browser does not support the <code>audio</code> element.
+                </audio>
+                 <audio  class="player" v-bind:src="sample.image" controls="true" v-else controlsList="nodownload"  > Your browser does not support the <code>audio</code> element.
+                </audio>
+                <div class="panel-footer">    
+                </div>
+                <div id="element"></div>
+            </div>
+            </div>
+        </div>
+  </div>
+</template>
+
+
+
+<template id="keys-page">
+  <div class="vue-component">
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+       <div class="row pricing-table">
+        <div class="col-md-4" v-for="sample in samples">
+            <div class="panel panel-danger">
+                <div class="panel-heading"><h3 class="text-center">{{sample.sample_type}}</h3></div>
+                <div class="panel-body text-center">
+                    <p class="lead" style="font-size:40px"><strong>{{sample.name}}</strong></p>
+                </div>
+                <ul class="list-group list-group-flush text-center">
+                    <li class="list-group-item"></i> BPM: {{sample.bpm}}</li>
+                    <li class="list-group-item"></i> Key: {{sample.key}}</li>
+                    <li class="list-group-item"></i> Sample Rate: {{sample.sample_rate}}</li>
+                    <li class="list-group-item"></i> Bit Depth: {{sample.bit_depth}}</li>
+                </ul>
+                 <audio class="player" v-bind:src="sample.image" controls="true" v-if="currentUser" controlsList="download" > Your browser does not support the <code>audio</code> element.
+                </audio>
+                 <audio  class="player" v-bind:src="sample.image" controls="true" v-else controlsList="nodownload"  > Your browser does not support the <code>audio</code> element.
+                </audio>
+                <div class="panel-footer">    
+                </div>
+                <div id="element"></div>
+            </div>
+            </div>
+        </div>
+  </div>
+</template>
+
+
+<template id="guitar-page">
+  <div class="vue-component">
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+       <div class="row pricing-table">
+        <div class="col-md-4" v-for="sample in samples">
+            <div class="panel panel-danger">
+                <div class="panel-heading"><h3 class="text-center">{{sample.sample_type}}</h3></div>
+                <div class="panel-body text-center">
+                    <p class="lead" style="font-size:40px"><strong>{{sample.name}}</strong></p>
+                </div>
+                <ul class="list-group list-group-flush text-center">
+                    <li class="list-group-item"></i> BPM: {{sample.bpm}}</li>
+                    <li class="list-group-item"></i> Key: {{sample.key}}</li>
+                    <li class="list-group-item"></i> Sample Rate: {{sample.sample_rate}}</li>
+                    <li class="list-group-item"></i> Bit Depth: {{sample.bit_depth}}</li>
+                </ul>
+                 <audio class="player" v-bind:src="sample.image" controls="true" v-if="currentUser" controlsList="download" > Your browser does not support the <code>audio</code> element.
+                </audio>
+                 <audio  class="player" v-bind:src="sample.image" controls="true" v-else controlsList="nodownload"  > Your browser does not support the <code>audio</code> element.
+                </audio>
+                <div class="panel-footer">    
+                </div>
+                <div id="element"></div>
+            </div>
+            </div>
+        </div>
+  </div>
+</template>
+
+
+<template id="vox-page">
+  <div class="vue-component">
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+       <div class="row pricing-table">
+        <div class="col-md-4" v-for="sample in samples">
+            <div class="panel panel-danger">
+                <div class="panel-heading"><h3 class="text-center">{{sample.sample_type}}</h3></div>
+                <div class="panel-body text-center">
+                    <p class="lead" style="font-size:40px"><strong>{{sample.name}}</strong></p>
+                </div>
+                <ul class="list-group list-group-flush text-center">
+                    <li class="list-group-item"></i> BPM: {{sample.bpm}}</li>
+                    <li class="list-group-item"></i> Key: {{sample.key}}</li>
+                    <li class="list-group-item"></i> Sample Rate: {{sample.sample_rate}}</li>
+                    <li class="list-group-item"></i> Bit Depth: {{sample.bit_depth}}</li>
+                </ul>
+                 <audio class="player" v-bind:src="sample.image" controls="true" v-if="currentUser" controlsList="download" > Your browser does not support the <code>audio</code> element.
+                </audio>
+                 <audio  class="player" v-bind:src="sample.image" controls="true" v-else controlsList="nodownload"  > Your browser does not support the <code>audio</code> element.
+                </audio>
+                <div class="panel-footer">    
+                </div>
+                <div id="element"></div>
+            </div>
+            </div>
+        </div>
+  </div>
+</template>
+
+<template id="bass-page">
+  <div class="vue-component">
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+       <div class="row pricing-table">
+        <div class="col-md-4" v-for="sample in samples">
+            <div class="panel panel-danger">
+                <div class="panel-heading"><h3 class="text-center">{{sample.sample_type}}</h3></div>
+                <div class="panel-body text-center">
+                    <p class="lead" style="font-size:40px"><strong>{{sample.name}}</strong></p>
+                </div>
+                <ul class="list-group list-group-flush text-center">
+                    <li class="list-group-item"></i> BPM: {{sample.bpm}}</li>
+                    <li class="list-group-item"></i> Key: {{sample.key}}</li>
+                    <li class="list-group-item"></i> Sample Rate: {{sample.sample_rate}}</li>
+                    <li class="list-group-item"></i> Bit Depth: {{sample.bit_depth}}</li>
                 </ul>
                  <audio class="player" v-bind:src="sample.image" controls="true" v-if="currentUser" controlsList="download" > Your browser does not support the <code>audio</code> element.
                 </audio>

@@ -597,10 +597,17 @@ footer *{
 #waveformpic {
     float: left;
     display: block;
-  margin: 0 auto;
+    margin: 0 auto;
 }
 
 #vector {
     text-align: : center;
 }
 
+#errors {
+    color: red;
+}
+
+#whitetext {
+    color: white;
+}

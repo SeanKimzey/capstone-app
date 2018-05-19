@@ -170,11 +170,12 @@ var HomePage = {
             this.newSample.sample_rate = "";
             this.newSample.bit_depth = "";
             input.value = "";
+
+            alert("Sample Uploaded Successfully");
+            location.reload(true);
+            router.push("/search_samples");
           }.bind(this)
         );
-        alert("Sample Uploaded Successfully");
-        location.reload(true);
-        router.push("/search_samples");
       }
     }
   },
@@ -467,12 +468,13 @@ var SampleUploadPage = {
             this.newSample.sample_rate = "";
             this.newSample.bit_depth = "";
             input.value = "";
+
+            location.reload(true);
+            router.push("/");
+            alert("Sample Uploaded Successfully");
+            // router.push("/search_samples");
           }.bind(this)
         );
-        location.reload(true);
-        router.push("/");
-        alert("Sample Uploaded Successfully");
-        // router.push("/search_samples");
       }
     }
   },
